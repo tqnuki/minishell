@@ -6,18 +6,20 @@
 #    By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/05 18:01:40 by mpankewi          #+#    #+#              #
-#    Updated: 2022/12/06 12:02:14 by mpankewi         ###   ########.fr        #
+#    Updated: 2022/12/14 10:18:46 by mpankewi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= minishell
 
-SRCS    	= srcs/minishell.c
+SRCS    	= minishell.c
 
-GCC			= gcc -Wall -Wextra -Werror
+GCC			= gcc -Wall -Wextra -Werror -lreadline
+
+OBJS		= ${SRCS:.c=.o}
 
 $(NAME): ${OBJS}
-		@$(GCC) -o $(NAME) $(SRCS)
+		@$(GCC) -o $(NAME) $(OBJS)
 		@echo Compiled All Sources!
 		
 all: $(NAME) 	
