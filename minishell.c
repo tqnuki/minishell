@@ -6,7 +6,7 @@
 /*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 17:10:15 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/14 11:35:44 by mpankewi         ###   ########.fr       */
+/*   Updated: 2022/12/18 16:13:52 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,16 +184,55 @@ char	*ft_strnstr(const char *haystack, const char *to_find, size_t size)
 	}
 	return (0);
 }
+char *get_value(char **lines, const char *key) {
+	for (int i = 0; lines[i] != NULL; i++) {
+		if (strncmp(lines[i], key, strlen(key)) == 0) {
+    		char *equals_pos = strchr(lines[i], '=');
+			if (equals_pos == NULL)
+				return "";
+      		else
+        		return equals_pos + 1;
+      }
+    }
+	return "";
+  }
 void prepend(char* s, const char* t)
 {
     size_t len = strlen(t);
     memmove(s + len, s, strlen(s) + 1);
     memcpy(s, t, len);
 }
+char *trim_until_slash(char *str) {
+  char *slash_pos = strchr(str, '/');
+  if (slash_pos == NULL)
+    return NULL;
+  else
+    return slash_pos + 1;
+}
+int strcmpeq(const char *s1, const char *s2, int n) {
+	int i = 0;
+	while (*s1 && *s2 && i < n) {
+    	if (*s1 == '=')
+    	  return 0;
+    	if (*s1 != *s2)
+    	  return (-1);
+    	s1++;
+    	s2++;
+		i++;
+	}
+	if(i == n)
+		return(0);
+ 	if (!*s1 && !*s2)
+    	return 0;
+	else if (!*s1)
+    	return -1;
+	else
+		return 1;
+}
 void delete_char_ptr(char **str_arr, char *str) {
   char **ptr = str_arr;
   while(*ptr) {
-    if(strcmp(*ptr, str) == 0) {
+    if(strcmpeq(*ptr, str, strlen(str)) == 0) {
       while(*ptr) {
         *ptr = *(ptr + 1);
         ptr++;
@@ -219,7 +258,7 @@ int launch(char **args)
 	pid_t pid, wpid;
 	int status;
 	pid = fork();
-	prepend(args[0], "/bin/")=;
+	prepend(args[0], "/bin/");
 	if (!pid) {
 	  if (execve(args[0], args, s.env) == -1)
 		perror("ERROR");
@@ -263,11 +302,20 @@ void mini_env()
 		printf("%s\n", s.env[i++]);
 }
 
+int isdollar(char *str)
+{
+	int i = 0;
+	while(str[i])
+		if(str[i++] == '$')
+			return(1);
+	return(0);
+}
 
 void mini_echo(char **args)
 {
 	int i = 1;
 	int j = 0;
+	char *str = malloc(1000);
 	while(args[i])
 	{
 		if(strcmp(args[i], "-n")==0){
@@ -279,14 +327,26 @@ void mini_echo(char **args)
 	}
 	while(args[i])
 	{
-		//printf("%s\n", ft_strnstr(args[i], "$", ft_strlen(args[i])));
-		printf("%s", args[i]);
+		if (isdollar(args[i]))
+		{
+			int k = 0;
+			int l = 0;
+			while(args[i][k] && args[i][k] != '$')
+				printf("%c", args[i][k++]);
+			k++;
+			while(args[i][k])
+				str[l++] = args[i][k++];
+			printf("%s", get_value(s.env, str));
+		}
+		else
+			printf("%s", args[i]);
 		if(args[i+1])
 			printf(" ");
 		i++;
 	}
 	if(j != 1)
 		printf("\n");
+	free(str);
 }
 
 void mini_unset(char *str)
@@ -297,8 +357,25 @@ void mini_unset(char *str)
 
 int mini_cd(char **args)
 {
+	char *str;
+	str = malloc(10000);
+	if (!args[1]){
+		if (chdir(get_value(s.env, "HOME")))
+			perror("ERROR");
+		return (1);}
+	if(args[1][0] == '~'){
+		if (chdir(get_value(s.env, "HOME")))
+			perror("ERROR");
+		args[1] = trim_until_slash(args[1]);
+		if(!args[1])
+			return(1);}
 	if (chdir(args[1]))
     	perror("ERROR");
+	str = getcwd(NULL, 0);
+	prepend(str, "PWD=");
+	mini_unset("PWD");
+	mini_export(str);
+	free(str);
   	return (1);
 }
 
