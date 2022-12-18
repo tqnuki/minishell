@@ -6,7 +6,7 @@
 /*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 17:10:15 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/18 16:13:52 by mpankewi         ###   ########.fr       */
+/*   Updated: 2022/12/18 16:36:30 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 typedef struct s_shell
 {
 	char **env;
+	int thing;
 }		t_shell;
 
 t_shell s;
@@ -255,12 +256,13 @@ char *findString(char **strings, char *startString)
 }
 int launch(char **args)
 {
+	s.thing = 0;
 	pid_t pid, wpid;
 	int status;
 	pid = fork();
 	prepend(args[0], "/bin/");
 	if (!pid) {
-	  if (execve(args[0], args, s.env) == -1)
+	  if ((s.thing = execve(args[0], args, s.env)) == -1)
 		perror("ERROR");
 	  exit(0);
 	}
@@ -273,6 +275,7 @@ void mini_pwd()
 {
 	int i = 0;
 	int j;
+	s.thing = 0;
 	while(s.env[i])
 	{
 		if (s.env[i][0] == 'P' && s.env[i][1] == 'W' && s.env[i][2] == 'D' && s.env[i][3] == '='){
@@ -284,6 +287,7 @@ void mini_pwd()
 		}
 		i++;
 	}	
+	
 }
 
 void mini_export(char *str)
@@ -293,10 +297,12 @@ void mini_export(char *str)
 		i++;
 	s.env[i] = malloc(1000);
 	ft_strlcpy(s.env[i], str);
+	
 }
 
 void mini_env()
 {
+	s.thing = 0;
 	int i = 0;
 	while (s.env[i])
 		printf("%s\n", s.env[i++]);
@@ -327,7 +333,9 @@ void mini_echo(char **args)
 	}
 	while(args[i])
 	{
-		if (isdollar(args[i]))
+		if(strcmp((args[i]), "$?") == 0)
+			printf("%d", s.thing);
+		else if (isdollar(args[i]))
 		{
 			int k = 0;
 			int l = 0;
@@ -346,6 +354,7 @@ void mini_echo(char **args)
 	}
 	if(j != 1)
 		printf("\n");
+	s.thing = 0;
 	free(str);
 }
 
@@ -358,6 +367,7 @@ void mini_unset(char *str)
 int mini_cd(char **args)
 {
 	char *str;
+	s.thing = 0;
 	str = malloc(10000);
 	if (!args[1]){
 		if (chdir(get_value(s.env, "HOME")))
@@ -369,8 +379,11 @@ int mini_cd(char **args)
 		args[1] = trim_until_slash(args[1]);
 		if(!args[1])
 			return(1);}
-	if (chdir(args[1]))
+	s.thing = chdir(args[1]);
+	if (s.thing)
     	perror("ERROR");
+	if(s.thing == -1)
+		s.thing = 1;
 	str = getcwd(NULL, 0);
 	prepend(str, "PWD=");
 	mini_unset("PWD");
@@ -443,6 +456,7 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	s.env = malloc(10000);
+	
 	copy_char_array(env, s.env);
 	//for (int i = 0; env[i]; i++)
 	//{
