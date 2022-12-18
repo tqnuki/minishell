@@ -6,7 +6,7 @@
 /*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 17:10:15 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/18 16:36:30 by mpankewi         ###   ########.fr       */
+/*   Updated: 2022/12/18 16:39:02 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,6 +289,7 @@ void mini_pwd()
 	}	
 	
 }
+
 
 void mini_export(char *str)
 {
