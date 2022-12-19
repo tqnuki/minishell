@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:54:28 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/19 11:14:25 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/19 11:49:19 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,53 +61,24 @@ void	mini_echo(char **args)
 {
 	int		i;
 	int		j;
-	int		k;
-	int		l;
 	char	*str;
 
 	i = 1;
 	j = 0;
-	k = 0;
-	l = 0;
 	str = malloc(1000);
-	while (args[i])
+	while (args[i++])
 	{
-		if (strcmp(args[i], "-n") == 0)
-		{
-			i++;
+		if (ft_strcmp(args[i], "-n") == 0)
 			j = 1;
-		}
 		else
 			break ;
 	}
-	while (args[i])
-	{
-		if (strcmp((args[i]), "$?") == 0)
-			printf("%d", g_s.thing);
-		else if (isdollar(args[i]))
-		{
-			while (args[i][k] && args[i][k] != '$')
-				printf("%c", args[i][k++]);
-			k++;
-			while (args[i][k])
-				str[l++] = args[i][k++];
-			printf("%s", get_value(g_s.env, str));
-		}
-		else
-			printf("%s", args[i]);
-		if (args[i +1])
-			printf(" ");
-		i++;
-	}
+	while (args[i++])
+		goofyahh2(args, i, str);
 	if (j != 1)
 		printf("\n");
 	g_s.thing = 0;
 	free(str);
-}
-
-void	mini_unset(char *str)
-{
-	delete_char_ptr(g_s.env, str);
 }
 
 int	mini_cd(char **args)
@@ -116,20 +87,8 @@ int	mini_cd(char **args)
 
 	g_s.thing = 0;
 	str = malloc(10000);
-	if (!args[1])
-	{
-		if (chdir(get_value(g_s.env, "HOME")))
-			perror("ERROR");
+	if (goofyahh(args) == 1)
 		return (1);
-	}
-	if (args[1][0] == '~')
-	{
-		if (chdir(get_value(g_s.env, "HOME")))
-			perror("ERROR");
-		args[1] = trim_until_slash(args[1]);
-		if (!args[1])
-			return (1);
-	}
 	g_s.thing = chdir(args[1]);
 	if (g_s.thing)
 		perror("ERROR");
