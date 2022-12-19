@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:59:40 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/19 12:13:52 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/19 13:03:05 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,18 @@ int	mini_execute(char **args, char *line)
 	return (1);
 }
 
-void	signalhandler(int signal)
+void	signalhandler(int sig)
 {
-	if (signal == SIGINT)
+	if (sig == SIGINT)
+	{
 		printf("\nbash-6.9.$ ");
-	if (signal == SIGQUIT)
-		signal = SIGQUIT;
-	g_s.otherthing = 1;
+		signal(SIGQUIT, signalhandler);
+	}
+	if (sig == SIGQUIT)
+		signal(SIGINT, signalhandler);
 }
 
-void loop(void)
+void	loop(void)
 {
 	char	*line;
 	char	**args;
@@ -81,18 +83,14 @@ void loop(void)
 	{
 		signal(SIGINT, signalhandler);
 		signal(SIGQUIT, signalhandler);
-		if(g_s.otherthing == 1)
-			g_s.otherthing = 0;
-		else
-		{
-			line = readline("bash-6.9.$ ");
-			if(!line)
-				exit(0);
-			args = ft_split(line, ' ');
-			status = mini_execute(args, line);
-			free(line);
-			free(args);
-		}
+		line = readline("bash-6.9.$ ");
+		if (!line)
+			exit(0);
+		add_history(line);
+		args = ft_split(line, ' ');
+		status = mini_execute(args, line);
+		free(line);
+		free(args);
 	}
 }
 
