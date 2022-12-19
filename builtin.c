@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:54:28 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/19 11:49:56 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/19 14:16:14 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,17 @@ void	mini_echo(char **args)
 	i = 1;
 	j = 0;
 	str = malloc(1000);
-	while (args[i++])
+	while (args[i])
 	{
 		if (ft_strcmp(args[i], "-n") == 0)
+		{
+			i++;
 			j = 1;
+		}
 		else
 			break ;
 	}
-	while (args[i++])
-		goofyahh2(args, i, str);
+	goofyahh2(args, i, str);
 	if (j != 1)
 		printf("\n");
 	g_s.thing = 0;
