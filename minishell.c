@@ -6,7 +6,7 @@
 /*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:59:40 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/19 12:20:45 by mpankewi         ###   ########.fr       */
+/*   Updated: 2022/12/19 12:25:36 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	loop(void)
 		line = readline("bash-6.9.$ ");
 		if (!line)
 			exit(0);
+		add_history(line);
 		args = ft_split(line, ' ');
 		status = mini_execute(args, line);
 		free(line);
