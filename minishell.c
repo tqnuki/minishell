@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:59:40 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/19 11:49:33 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/19 12:13:17 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,11 @@ void	signalhandler(int signal)
 	if (signal == SIGINT)
 		printf("\nbash-6.9.$ ");
 	if (signal == SIGQUIT)
-		exit(0);
-	if (signal == SIGTSTP)
-		write(1, "uwu", 3);
+		signal = SIGQUIT;
+	g_s.otherthing = 1;
 }
 
-void	loop(void)
+void loop(void)
 {
 	char	*line;
 	char	**args;
@@ -81,13 +80,19 @@ void	loop(void)
 	while (status)
 	{
 		signal(SIGINT, signalhandler);
-		signal(SIGTSTP, signalhandler);
 		signal(SIGQUIT, signalhandler);
-		line = readline("bash-6.9.$ ");
-		args = ft_split(line, ' ');
-		status = mini_execute(args, line);
-		free(line);
-		free(args);
+		if(g_s.otherthing == 1)
+			g_s.otherthing = 0;
+		else
+		{
+			line = readline("bash-6.9.$ ");
+			if(!line)
+				exit(0);
+			args = ft_split(line, ' ');
+			status = mini_execute(args, line);
+			free(line);
+			free(args);
+		}
 	}
 }
 

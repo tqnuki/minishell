@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 07:55:19 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/19 11:49:32 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/19 12:13:17 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_shell
 {
 	char	**env;
 	int		thing;
+	int		otherthing;
 }		t_shell;
 
 void	mini_pwd(void);
