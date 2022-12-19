@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:11:50 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/19 10:02:16 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/19 10:51:30 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ size_t	ft_strlen(const char *str)
 		l++;
 	return (l);
 }
+
 size_t	ft_strcpy(char *dest, const char *src)
 {
 	size_t	a;

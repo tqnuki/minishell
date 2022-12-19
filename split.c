@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 07:55:03 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/19 10:33:57 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/19 10:51:23 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static int	wordcount(const char *s, char c, int opt, char **strs)
 	free(strs);
 	return (1);
 }
+
 static int	wordlen(const char *s, char c, int i)
 {
 	int	i2;
@@ -52,6 +53,7 @@ static int	wordlen(const char *s, char c, int i)
 	}
 	return (i2);
 }
+
 static char	*putword(const char *str, char charset, int i)
 {
 	char	*rep;
@@ -74,6 +76,7 @@ static char	*putword(const char *str, char charset, int i)
 	rep[j] = '\0';
 	return (rep);
 }
+
 static char	**split2(const char *str, char charset, int j, int i)
 {
 	char	**rep;
@@ -99,6 +102,7 @@ static char	**split2(const char *str, char charset, int j, int i)
 	rep[j] = 0;
 	return (rep);
 }
+
 char	**ft_split(const char *str, char charset)
 {
 	char	**rep;

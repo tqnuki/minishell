@@ -6,7 +6,7 @@
 #    By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/05 18:01:40 by mpankewi          #+#    #+#              #
-#    Updated: 2022/12/19 10:37:27 by mdoumi           ###   ########.fr        #
+#    Updated: 2022/12/19 10:39:15 by mdoumi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,10 +29,12 @@ $(NAME): ${OBJS}
 all: $(NAME)
 
 clean:
+			@make clean -C libft
 			@rm -rf ${OBJS}
 			@echo Removed All Object Files!
 
 fclean:	clean
+			@make fclean -C libft
 			@rm -rf $(NAME)
 			@echo Removed Executable!
 
