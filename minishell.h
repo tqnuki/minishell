@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 07:55:19 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/19 13:03:11 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/19 14:16:35 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <signal.h>
 # include <unistd.h>
+# include <sys/wait.h>
 # include "libft/libft.h"
 
 typedef struct s_shell

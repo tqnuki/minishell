@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:34:01 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/19 11:50:33 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/19 14:15:59 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,21 +52,25 @@ void	goofyahh2(char **args, int i, char *str)
 
 	k = 0;
 	l = 0;
-	if (ft_strcmp((args[i]), "$?") == 0)
-		printf("%d", g_s.thing);
-	else if (isdollar(args[i]))
+	while (args[i])
 	{
-		while (args[i][k] && args[i][k] != '$')
-			printf("%c", args[i][k++]);
-		k++;
-		while (args[i][k])
-			str[l++] = args[i][k++];
-		printf("%s", get_value(g_s.env, str));
+		if (ft_strcmp((args[i]), "$?") == 0)
+			printf("%d", g_s.thing);
+		else if (isdollar(args[i]))
+		{
+			while (args[i][k] && args[i][k] != '$')
+				printf("%c", args[i][k++]);
+			k++;
+			while (args[i][k])
+				str[l++] = args[i][k++];
+			printf("%s", get_value(g_s.env, str));
+		}
+		else
+			printf("%s", args[i]);
+		if (args[i +1])
+			printf(" ");
+		i++;
 	}
-	else
-		printf("%s", args[i]);
-	if (args[i + 1])
-		printf(" ");
 }
 
 void	mini_unset(char *str)

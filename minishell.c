@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:59:40 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/19 13:03:05 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/19 16:37:45 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ int	launch(char **args)
 {
 	pid_t	pid;
 
-	g_s.thing = 0;
 	pid = fork();
+	g_s.thing = 0;
 	prepend(args[0], "/bin/");
+	if (pid)
+		wait(NULL);
 	if (!pid)
 	{
 		g_s.thing = execve(args[0], args, g_s.env);
@@ -56,8 +58,6 @@ int	mini_execute(char **args, char *line)
 		mini_env();
 	else
 		launch(args);
-	while (i < 100000000)
-		i++;
 	return (1);
 }
 
@@ -77,6 +77,7 @@ void	loop(void)
 	char	*line;
 	char	**args;
 	int		status;
+	int id;
 
 	status = 1;
 	while (status)
