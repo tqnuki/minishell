@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:34:01 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/20 07:12:55 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/20 08:48:25 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,55 @@ int	pippin(char *str, char **av)
 	return (0);
 }
 
+static void	trim(char **av)
+{
+	int	i;
+
+	i = -1;
+	while (av[++i])
+		av[i] = ft_strtrim(av[i], " ");
+}
+
 void	pipe_execute(char **args, char *line)
 {
-	printf("%s\n", line);
+	int	fd[2];
+
+	args = ft_single_split(line, '|');
+	trim(args);
+	if (pipe(fd) == -1)
+		perror("ERROR");
+
+	int pid1 = fork();
+	if (pid1 < 0)
+		perror("ERROR");
+
+	if (pid1 == 0)
+	{
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[0]);
+		close(fd[1]);
+		mini_execute(args[0], args[0]);
+	}
+
+	int pid2 = fork();
+	if (pid2 < 0)
+		perror("ERROR");
+
+	if (pid2 == 0)
+	{
+		dup2(fd[0], STDIN_FILENO);
+		close(fd[0]);
+		close(fd[1]);
+		mini_execute(args[1], args[1]);
+	}
+
+	close(fd[0]);
+	close(fd[1]);
+
+	waitpid(pid1, NULL, 0);
+	waitpid(pid2, NULL, 0);
+
+	return ;
 }
 
 //int	main()

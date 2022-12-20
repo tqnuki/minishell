@@ -20,7 +20,7 @@ int	main(int ac, char **av)
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[0]);
 		close(fd[1]);
-		execlp("ping", "ping", "-c", "5", "google.com", NULL);
+		execlp("echo", "echo", "OwOoo", NULL);
 	}
 
 	int	pid2 = fork();
@@ -32,7 +32,7 @@ int	main(int ac, char **av)
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
 		close(fd[1]);
-		execlp("grep", "grep", "rtt", NULL);
+		execlp("grep", "grep", "o", NULL);
 	}
 
 	close(fd[0]);

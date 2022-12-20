@@ -6,7 +6,7 @@
 #    By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/05 18:01:40 by mpankewi          #+#    #+#              #
-#    Updated: 2022/12/20 06:42:20 by mdoumi           ###   ########.fr        #
+#    Updated: 2022/12/20 08:47:28 by mdoumi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRCS    	= minishell.c \
 				builtin.c \
 				utils.c \
 				utils2.c \
-				utils3.c
+				utils3.c \
+				single_split.c
 
 GCC			= gcc -Wall -Wextra -Werror -lreadline
 LIBS 		= libft/libft.a

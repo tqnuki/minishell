@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 07:55:19 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/20 07:13:05 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/20 08:47:08 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,9 @@ char	*trim_until_slash(char *str);
 char	*get_value(char **lines, const char *key);
 int		pippin(char *str, char **av);
 void	pipe_execute(char **args, char *line);
+
+//better_split.c
+
+char	**ft_single_split(const char *str, char charset);
 
 #endif
