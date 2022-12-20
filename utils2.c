@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:29:22 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/20 06:59:50 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/20 09:14:14 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	copy_char_array(char **source, char **dest)
 		i++;
 	}
 }
-
 
 void	prepend(char *s, const char *t)
 {
