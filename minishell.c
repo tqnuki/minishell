@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:59:40 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/19 16:37:45 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/20 07:15:03 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	launch(char **args)
 	pid = fork();
 	g_s.thing = 0;
 	prepend(args[0], "/bin/");
+	if (pid < 0)
+		perror("ERROR");
 	if (pid)
 		wait(NULL);
 	if (!pid)
@@ -30,8 +32,6 @@ int	launch(char **args)
 			perror("ERROR");
 		exit(0);
 	}
-	else if (pid < 0)
-		perror("ERROR");
 	return (1);
 }
 
@@ -44,6 +44,8 @@ int	mini_execute(char **args, char *line)
 		return (1);
 	if (ft_strcmp(args[0], "exit") == 0)
 		exit(0);
+	else if (pippin("|", args) == 1)
+		pipe_execute(args, line);
 	else if (ft_strcmp(args[0], "cd") == 0)
 		mini_cd(args);
 	else if (ft_strcmp(args[0], "echo") == 0)
@@ -77,7 +79,6 @@ void	loop(void)
 	char	*line;
 	char	**args;
 	int		status;
-	int id;
 
 	status = 1;
 	while (status)

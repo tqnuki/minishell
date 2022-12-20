@@ -6,21 +6,13 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:11:50 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/19 11:20:40 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/20 07:02:30 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	ft_strlen(const char *str)
-{
-	int	l;
-
-	l = 0;
-	while (str[l] != '\0')
-		l++;
-	return (l);
-}
+extern t_shell	g_s;
 
 size_t	ft_strcpy(char *dest, const char *src)
 {
@@ -34,31 +26,6 @@ size_t	ft_strcpy(char *dest, const char *src)
 	}
 	dest[a] = '\0';
 	return (ft_strlen(src));
-}
-
-char	*ft_strnstr(const char *haystack, const char *to_find, size_t size)
-{
-	size_t	a;
-	size_t	b;
-	char	*str;
-
-	str = (char *) haystack;
-	a = 0;
-	b = 0;
-	if (to_find[a] == '\0')
-		return (str);
-	if (!size)
-		return (0);
-	while (str[a] && size)
-	{
-		while (str[a + b] == to_find[b] && str[a + b] && a + b < size)
-			b++;
-		if (!to_find[b])
-			return (str + a);
-		a++;
-		b = 0;
-	}
-	return (0);
 }
 
 int	strcmpeq(const char *s1, const char *s2, int n)
@@ -81,19 +48,44 @@ int	strcmpeq(const char *s1, const char *s2, int n)
 		return (1);
 }
 
-void	delete_char_ptr(char **str_arr, char *str)
+int	goofyahh(char **args)
 {
-	char	**ptr;
-
-	ptr = str_arr;
-	while (*ptr)
+	if (!args[1])
 	{
-		if (strcmpeq(*ptr, str, ft_strlen(str)) == 0)
-		{
-			while (*ptr++)
-				*ptr = *(ptr + 1);
-			break ;
-		}
-	ptr++;
+		if (chdir(get_value(g_s.env, "HOME")))
+			perror("ERROR");
+		return (1);
 	}
+	if (args[1][0] == '~')
+	{
+		if (chdir(get_value(g_s.env, "HOME")))
+			perror("ERROR");
+		args[1] = trim_until_slash(args[1]);
+		if (!args[1])
+			return (1);
+	}
+	return (0);
+}
+
+int	ft_strcmp(const char *str1, const char *str2)
+{
+	while (*str1 && *str2)
+	{
+		if (*str1 != *str2)
+			return (*str1 - *str2);
+		str1++;
+		str2++;
+	}
+	return (*str1 - *str2);
+}
+
+int	isdollar(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		if (str[i++] == '$')
+			return (1);
+	return (0);
 }

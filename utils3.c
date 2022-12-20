@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:34:01 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/19 14:15:59 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/20 07:12:55 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,66 +14,66 @@
 
 extern t_shell	g_s;
 
-int	goofyahh(char **args)
+char	*trim_until_slash(char *str)
 {
-	if (!args[1])
+	char	*slash_pos;
+
+	slash_pos = ft_strchr(str, '/');
+	if (slash_pos == NULL)
+		return (NULL);
+	else
+		return (slash_pos + 1);
+}
+
+char	*get_value(char **lines, const char *key)
+{
+	int		i;
+	char	*equals_pos;
+
+	i = 0;
+	while (lines[i])
 	{
-		if (chdir(get_value(g_s.env, "HOME")))
-			perror("ERROR");
-		return (1);
+		if (ft_strncmp(lines[i], key, ft_strlen(key)) == 0)
+		{
+			equals_pos = ft_strchr(lines[i], '=');
+			if (equals_pos == NULL)
+				return ("");
+			else
+				return (equals_pos + 1);
+		}
+		i++;
 	}
-	if (args[1][0] == '~')
-	{
-		if (chdir(get_value(g_s.env, "HOME")))
-			perror("ERROR");
-		args[1] = trim_until_slash(args[1]);
-		if (!args[1])
+	return ("");
+}
+
+int	pippin(char *str, char **av)
+{
+	int	i;
+
+	i = -1;
+	while (av[++i])
+		if (av[i][0] == str[0] && av[i][1] == '\0' && str[1] == '\0')
 			return (1);
-	}
 	return (0);
 }
 
-int	ft_strcmp(const char *str1, const char *str2)
+void	pipe_execute(char **args, char *line)
 {
-	while (*str1 && *str2)
-	{
-		if (*str1 != *str2)
-			return (*str1 - *str2);
-		str1++;
-		str2++;
-	}
-	return (*str1 - *str2);
+	printf("%s\n", line);
 }
 
-void	goofyahh2(char **args, int i, char *str)
-{
-	int	l;
-	int	k;
+//int	main()
+//{
+	//char **tab;
 
-	k = 0;
-	l = 0;
-	while (args[i])
-	{
-		if (ft_strcmp((args[i]), "$?") == 0)
-			printf("%d", g_s.thing);
-		else if (isdollar(args[i]))
-		{
-			while (args[i][k] && args[i][k] != '$')
-				printf("%c", args[i][k++]);
-			k++;
-			while (args[i][k])
-				str[l++] = args[i][k++];
-			printf("%s", get_value(g_s.env, str));
-		}
-		else
-			printf("%s", args[i]);
-		if (args[i +1])
-			printf(" ");
-		i++;
-	}
-}
+	//tab = malloc(sizeof(char *) * 10);
+	//for (int i = 0; i < 10; i++)
+		//tab[i] = malloc(sizeof(char) * 10);
+	//tab[0] = "Bonsoir";
+	//tab[1] = "Je";
+	//tab[2] = "|";
+	//tab[3] = "Suis";
+	//tab[4] = "Cool";
 
-void	mini_unset(char *str)
-{
-	delete_char_ptr(g_s.env, str);
-}
+	//printf("%d\n", pippin("|s", tab));
+//}

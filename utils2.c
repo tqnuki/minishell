@@ -6,11 +6,13 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:29:22 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/19 11:35:27 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/20 06:59:50 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_shell	g_s;
 
 void	copy_char_array(char **source, char **dest)
 {
@@ -25,26 +27,6 @@ void	copy_char_array(char **source, char **dest)
 	}
 }
 
-char	*get_value(char **lines, const char *key)
-{
-	int		i;
-	char	*equals_pos;
-
-	i = 0;
-	while (lines[i])
-	{
-		if (ft_strncmp(lines[i], key, ft_strlen(key)) == 0)
-		{
-			equals_pos = ft_strchr(lines[i], '=');
-			if (equals_pos == NULL)
-				return ("");
-			else
-				return (equals_pos + 1);
-		}
-		i++;
-	}
-	return ("");
-}
 
 void	prepend(char *s, const char *t)
 {
@@ -55,24 +37,52 @@ void	prepend(char *s, const char *t)
 	ft_memcpy(s, t, len);
 }
 
-char	*trim_until_slash(char *str)
+void	delete_char_ptr(char **str_arr, char *str)
 {
-	char	*slash_pos;
+	char	**ptr;
 
-	slash_pos = ft_strchr(str, '/');
-	if (slash_pos == NULL)
-		return (NULL);
-	else
-		return (slash_pos + 1);
+	ptr = str_arr;
+	while (*ptr)
+	{
+		if (strcmpeq(*ptr, str, ft_strlen(str)) == 0)
+		{
+			while (*ptr++)
+				*ptr = *(ptr + 1);
+			break ;
+		}
+	ptr++;
+	}
 }
 
-int	isdollar(char *str)
+void	goofyahh2(char **args, int i, char *str)
 {
-	int	i;
+	int	l;
+	int	k;
 
-	i = 0;
-	while (str[i])
-		if (str[i++] == '$')
-			return (1);
-	return (0);
+	k = 0;
+	l = 0;
+	while (args[i])
+	{
+		if (ft_strcmp((args[i]), "$?") == 0)
+			printf("%d", g_s.thing);
+		else if (isdollar(args[i]))
+		{
+			while (args[i][k] && args[i][k] != '$')
+				printf("%c", args[i][k++]);
+			k++;
+			while (args[i][k])
+				str[l++] = args[i][k++];
+			printf("%s", get_value(g_s.env, str));
+		}
+		else
+			printf("%s", args[i]);
+		if (args[i +1])
+			printf(" ");
+		i++;
+	}
+}
+
+void	mini_unset(char *str)
+{
+	delete_char_ptr(g_s.env, str);
 }

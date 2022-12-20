@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpankewi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:57:31 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/11/04 13:52:24 by mpankewi         ###   ########.fr       */
+/*   Updated: 2022/12/20 06:44:22 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_strnstr(const char *haystack, const char *to_find, size_t size)
