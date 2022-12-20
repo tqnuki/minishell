@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:59:40 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/20 11:06:53 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/20 11:08:29 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int	launch(char **args)
 		wait(NULL);
 	if (!pid)
 	{
-		printf("%s\n", args[0]);
-		printf("%s\n", args[1]);
 		g_s.thing = execve(args[0], args, g_s.env);
 		if (g_s.thing == -1)
 			perror("ERROR");
