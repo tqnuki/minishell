@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 09:15:03 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/20 09:17:50 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/20 11:05:43 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,12 @@ void	trim(char **av)
 {
 	int	i;
 
-	i = -1;
-	while (av[++i])
+	i = 0;
+	while (av[i])
+	{
 		av[i] = ft_strtrim(av[i], " ");
+		i++;
+	}
 }
 
 char	**cupid(char *str)

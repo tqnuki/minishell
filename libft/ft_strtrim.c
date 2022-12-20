@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpankewi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:56:47 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/11/05 15:30:34 by mpankewi         ###   ########.fr       */
+/*   Updated: 2022/12/20 10:07:36 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 static int	is_set(const char c, const char *set)

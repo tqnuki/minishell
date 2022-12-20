@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 08:39:11 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/20 08:46:53 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/20 10:11:22 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static char	**split2(const char *str, char charset, int j, int i)
 		i++;
 	while (str[i] != '\0' && str[i] == charset)
 		i++;
-	rep[j++] = ft_substr(str, i, ft_strlen(str) - i - 1);
+	rep[j++] = ft_substr(str, i, ft_strlen(str) - i + 1);
 	rep[j] = 0;
 	return (rep);
 }
