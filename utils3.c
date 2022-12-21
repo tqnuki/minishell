@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-extern t_shell	g_s;
+extern t_shell	*g_s;
 
 char	*trim_until_slash(char *str)
 {

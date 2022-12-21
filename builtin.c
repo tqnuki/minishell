@@ -6,13 +6,13 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:54:28 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/21 15:45:10 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/21 16:36:33 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_shell	g_s;
+extern t_shell	*g_s;
 
 void	mini_pwd(void)
 {
@@ -20,15 +20,15 @@ void	mini_pwd(void)
 	int	j;
 
 	i = 0;
-	g_s.thing = 0;
-	while (g_s.env[i])
+	g_s->thing = 0;
+	while (g_s->env[i])
 	{
-		if (g_s.env[i][0] == 'P' && g_s.env[i][1] == 'W'
-				&& g_s.env[i][2] == 'D' && g_s.env[i][3] == '=')
+		if (g_s->env[i][0] == 'P' && g_s->env[i][1] == 'W'
+				&& g_s->env[i][2] == 'D' && g_s->env[i][3] == '=')
 		{
 			j = 4;
-			while (g_s.env[i][j])
-				write(1, &g_s.env[i][j++], 1);
+			while (g_s->env[i][j])
+				write(1, &g_s->env[i][j++], 1);
 			write(1, "\n", 1);
 			return ;
 		}
@@ -44,10 +44,10 @@ void	mini_export(char *str)
 	str = trim_quotes(str);
 	if(!str)
 		return ;
-	while (g_s.env[i])
+	while (g_s->env[i])
 		i++;
-	g_s.env[i] = malloc(1000);
-	ft_strcpy(g_s.env[i], str);
+	g_s->env[i] = malloc(1000);
+	ft_strcpy(g_s->env[i], str);
 }
 
 void	mini_env(void)
@@ -55,9 +55,9 @@ void	mini_env(void)
 	int	i;
 
 	i = 0;
-	g_s.thing = 0;
-	while (g_s.env[i])
-		printf("%s\n", g_s.env[i++]);
+	g_s->thing = 0;
+	while (g_s->env[i])
+		printf("%s\n", g_s->env[i++]);
 }
 
 void	mini_echo(char **args)
@@ -66,9 +66,13 @@ void	mini_echo(char **args)
 	int		j;
 	char	*str;
 
-	i = 1;
 	j = 0;
 	str = malloc(1000);
+	i = 1;
+	while (args[i])
+	{
+		check_unclosed_quotes(args[i])
+	}
 	while (args[i])
 	{
 		if (ft_strcmp(args[i], "-n") == 0)
@@ -82,7 +86,7 @@ void	mini_echo(char **args)
 	goofyahh2(args, i, str);
 	if (j != 1)
 		printf("\n");
-	g_s.thing = 0;
+	g_s->thing = 0;
 	free(str);
 }
 
@@ -90,18 +94,18 @@ int	mini_cd(char **args)
 {
 	char	*str;
 
-	g_s.thing = 0;
+	g_s->thing = 0;
 	args[1] = trim_quotes(args[1]);
 	if(!args[1])
 		return(0);
 	str = malloc(10000);
 	if (goofyahh(args) == 1)
 		return (1);
-	g_s.thing = chdir(args[1]);
-	if (g_s.thing)
+	g_s->thing = chdir(args[1]);
+	if (g_s->thing)
 		perror("ERROR");
-	if (g_s.thing == -1)
-		g_s.thing = 1;
+	if (g_s->thing == -1)
+		g_s->thing = 1;
 	str = getcwd(NULL, 0);
 	prepend(str, "PWD=");
 	mini_unset("PWD");
@@ -109,3 +113,4 @@ int	mini_cd(char **args)
 	free(str);
 	return (1);
 }
+

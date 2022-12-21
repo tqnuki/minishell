@@ -6,13 +6,13 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:11:50 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/20 07:02:30 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/21 15:55:03 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_shell	g_s;
+extern t_shell	*g_s;
 
 size_t	ft_strcpy(char *dest, const char *src)
 {
@@ -52,13 +52,13 @@ int	goofyahh(char **args)
 {
 	if (!args[1])
 	{
-		if (chdir(get_value(g_s.env, "HOME")))
+		if (chdir(get_value(g_s->env, "HOME")))
 			perror("ERROR");
 		return (1);
 	}
 	if (args[1][0] == '~')
 	{
-		if (chdir(get_value(g_s.env, "HOME")))
+		if (chdir(get_value(g_s->env, "HOME")))
 			perror("ERROR");
 		args[1] = trim_until_slash(args[1]);
 		if (!args[1])

@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 09:15:03 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/21 15:42:55 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/21 16:21:50 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,17 @@ char *trim_quotes(char *s) {
     }
   }
   return s;
+}
+
+int check_unclosed_quotes(char *s) {
+  if(!s)
+    return(1);
+  int len = ft_strlen(s);
+  if (s[0] == '\'' || s[0] == '"') {
+    if (s[0] != s[len - 1]) {
+      printf("Error: unclosed quotes\n");
+      return(1);
+    }
+  }
+  return 0;
 }

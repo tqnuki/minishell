@@ -6,29 +6,31 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:59:40 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/21 11:46:47 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/21 16:32:00 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_shell	g_s;
+t_shell	*g_s;
 
 #include <string.h>
 
-int launch_executable(const char *name, char *arguments[], char *line)
+int launch_executable(char *name, char *arguments[], char *line)
 {
 	char *path;
 	char *exec_path;
 	char *dir;
 	char **tmp;
 
+	if (name[0] == '/')
+		execve(name, arguments, g_s->env);
 	if (pippin("|", arguments) == 1)
 	{
 		pipe_execute(arguments, ft_strtrim(ft_single_split(line, '|')[1], " "));
 		return (0);
 	}
-	path = getenv("PATH");
+	path = get_value(g_s->env, "PATH");
 	if (path == NULL)
 	{
     	printf("Error: PATH environment variable not set\n");
@@ -43,7 +45,7 @@ int launch_executable(const char *name, char *arguments[], char *line)
    		ft_strlcat(exec_path, name, 1000);
 		if (access(exec_path, X_OK) == 0)
 		{
-			if (execve(exec_path, arguments, g_s.env) == -1)
+			if (execve(exec_path, arguments, g_s->env) == -1)
 				perror("execve failed");
 			return (0);
 		}
@@ -58,7 +60,7 @@ int	launch(char **args, char *line)
 	pid_t	pid;
 
 	pid = fork();
-	g_s.thing = 0;
+	g_s->thing = 0;
 	if (pid < 0)
 		perror("ERROR");
 	if (pid)
@@ -136,8 +138,9 @@ int	main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
-	g_s.env = malloc(10000);
-	copy_char_array(env, g_s.env);
+	g_s = malloc(sizeof(t_shell));
+	g_s->env = malloc(100000);
+	copy_char_array(env, g_s->env);
 	loop();
-	free(g_s.env);
+	free(g_s->env);
 }
