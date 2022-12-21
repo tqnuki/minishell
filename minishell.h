@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 07:55:19 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/21 09:10:38 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/21 15:32:01 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		launch(char **args, char *line);
 int		mini_execute(char **args, char *line);
 void	signalHandler(int signal);
 void	loop(void);
-int 	launch_executable(const char *name, char *arguments[], char *line);
+int		launch_executable(const char *name, char *arguments[], char *line);
 
 //utils.c
 
@@ -71,10 +71,10 @@ void	pipe_execute(char **args, char *line);
 int		pippin(char *str, char **av);
 void	trim(char **av);
 char	**cupid(char *str);
-char *ft_strtok(char *str, const char *delim);
+char	*ft_strtok(char *str, const char *delim);
 
-//better_split.c
+//single_split.c
 
 char	**ft_single_split(const char *str, char charset);
-
+char *trim_quotes(char *s);
 #endif

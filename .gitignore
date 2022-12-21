@@ -2,6 +2,5 @@
 *.a
 *.out
 test.c
-*.txt
 minishell
 .vscode/

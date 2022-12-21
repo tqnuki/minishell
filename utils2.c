@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:29:22 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/21 12:29:55 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/21 15:47:38 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,16 @@ void	goofyahh2(char **args, int i, char *str)
 
 void	mini_unset(char *str)
 {
-	delete_char_ptr(g_s.env, str);
+	int	i;
+
+	i = 0;
+	//str = trim_quotes(str);
+	//if(!str)
+	//	return ;
+	while (g_s.env[i])
+	{
+		if (ft_strncmp(g_s.env[i], str, ft_strlen(str)) == 0)
+			printf("%s\n", g_s.env[i]);
+		i++;
+	}
 }

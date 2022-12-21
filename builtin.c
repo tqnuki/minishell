@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:54:28 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/19 14:16:14 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/21 15:45:10 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ void	mini_export(char *str)
 	int	i;
 
 	i = 0;
+	str = trim_quotes(str);
+	if(!str)
+		return ;
 	while (g_s.env[i])
 		i++;
 	g_s.env[i] = malloc(1000);
@@ -88,6 +91,9 @@ int	mini_cd(char **args)
 	char	*str;
 
 	g_s.thing = 0;
+	args[1] = trim_quotes(args[1]);
+	if(!args[1])
+		return(0);
 	str = malloc(10000);
 	if (goofyahh(args) == 1)
 		return (1);

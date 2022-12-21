@@ -1,0 +1,15 @@
+fix $? need to be working on /bin commands
+fix quotes on everything else
+signals ctrl c prompt
+redirections
+path
+quotes as arguments for fucntions
+mix pipes and redirections, failing commands with pipes
+
+DO :
+
+- Fix the unset function because it just doesnt work
+
+FINISH :
+
+- Redirections create file uwu test.c
