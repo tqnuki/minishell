@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 07:55:19 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/21 16:32:12 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/21 16:50:45 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		launch_executable(char *name, char *arguments[], char *line);
 size_t	ft_strcpy(char *dest, const char *src);
 int		strcmpeq(const char *s1, const char *s2, int n);
 int		goofyahh(char **args);
-int		ft_strcmp(const char *str1, const char *str2);
+int		ft_strcmp(char *str1, char *str2);
 int		isdollar(char *str);
 
 //utils2.c

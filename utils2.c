@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:29:22 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/21 16:17:59 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/21 16:54:10 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,13 @@ void	goofyahh2(char **args, int i, char *str)
 	sq = 0;
 	k = 0;
 	l = 0;
+	if(args[i])
+	{
 	if (args[i][0] == '"')
 		q = 1;
 	if (args[i][0] == '\'')
 		sq = 1;
+	}
 	while (args[i])
 	{
 		if (isdollar(args[i]) && !sq)

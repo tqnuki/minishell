@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:54:28 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/21 16:36:33 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/21 16:53:09 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,10 @@ void	mini_echo(char **args)
 	i = 1;
 	while (args[i])
 	{
-		check_unclosed_quotes(args[i])
+		if(check_unclosed_quotes(args[i++]) == 1)
+			return;
 	}
+	i = 1;
 	while (args[i])
 	{
 		if (ft_strcmp(args[i], "-n") == 0)
@@ -95,10 +97,16 @@ int	mini_cd(char **args)
 	char	*str;
 
 	g_s->thing = 0;
-	args[1] = trim_quotes(args[1]);
 	if(!args[1])
-		return(0);
-	str = malloc(10000);
+	{
+		chdir(get_value(g_s->env, "HOME"));
+		mini_unset("PWD");
+		str = getcwd(NULL, 0);
+		prepend(str, "PWD=");
+		mini_export(str);
+		return(1);
+	}
+	args[1] = trim_quotes(args[1]);
 	if (goofyahh(args) == 1)
 		return (1);
 	g_s->thing = chdir(args[1]);
@@ -110,7 +118,6 @@ int	mini_cd(char **args)
 	prepend(str, "PWD=");
 	mini_unset("PWD");
 	mini_export(str);
-	free(str);
 	return (1);
 }
 

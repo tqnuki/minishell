@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:11:50 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/21 15:55:03 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/21 16:50:24 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,18 @@ int	goofyahh(char **args)
 	return (0);
 }
 
-int	ft_strcmp(const char *str1, const char *str2)
+int	ft_strcmp(char *str1, char *str2)
 {
-	while (*str1 && *str2)
+	int i;
+
+	i = 0;
+	while (str1[i] && str2[i])
 	{
-		if (*str1 != *str2)
-			return (*str1 - *str2);
-		str1++;
-		str2++;
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
+		i++;
 	}
-	return (*str1 - *str2);
+	return (str1[i] - str2[i]);
 }
 
 int	isdollar(char *str)

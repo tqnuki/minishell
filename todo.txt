@@ -1,7 +1,5 @@
 DO :
 
-- Fix echo "-n"
-- Need to detect unclosed quotes for echo
 - Redirections
 - $? doesnt work for /bin commands
 
