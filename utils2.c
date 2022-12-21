@@ -6,7 +6,7 @@
 /*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:29:22 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/21 16:54:10 by mpankewi         ###   ########.fr       */
+/*   Updated: 2022/12/21 17:26:57 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,11 @@ void	mini_unset(char *str)
 
 	i = -1;
 	boul = 0;
+	if (!str)
+		return ;
+	str = trim_quotes(str);
+	if(!str)
+		return ;
 	while (g_s->env[++i])
 		if (ft_strncmp(g_s->env[i], str, ft_strlen(str)) == 0)
 		{

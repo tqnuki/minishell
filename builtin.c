@@ -6,7 +6,7 @@
 /*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:54:28 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/21 16:53:09 by mpankewi         ###   ########.fr       */
+/*   Updated: 2022/12/21 17:27:06 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	mini_export(char *str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return ;
 	str = trim_quotes(str);
 	if(!str)
 		return ;

@@ -1,7 +1,6 @@
 DO :
 
 - Redirections
-- $? doesnt work for /bin commands
 
 FINISH :
 
