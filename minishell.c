@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:59:40 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/21 09:13:04 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/21 11:46:47 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,20 @@ int launch_executable(const char *name, char *arguments[], char *line)
 	char *path;
 	char *exec_path;
 	char *dir;
+	char **tmp;
 
+	if (pippin("|", arguments) == 1)
+	{
+		pipe_execute(arguments, ft_strtrim(ft_single_split(line, '|')[1], " "));
+		return (0);
+	}
 	path = getenv("PATH");
 	if (path == NULL)
 	{
     	printf("Error: PATH environment variable not set\n");
     	return 1;
   	}
-	dir = strtok(path, ":");
+	dir = ft_strtok(path, ":");
 	while (dir != NULL)
 	{
 		exec_path = malloc(1000);
@@ -41,7 +47,7 @@ int launch_executable(const char *name, char *arguments[], char *line)
 				perror("execve failed");
 			return (0);
 		}
-		dir = strtok(NULL, ":");
+		dir = ft_strtok(NULL, ":");
 	}
 	printf("Error: executable '%s' not found\n", name);
 	return (1);
@@ -97,7 +103,7 @@ void	signalhandler(int sig)
 {
 	if (sig == SIGINT)
 	{
-		printf("\n");
+		printf("\nbash-6.9.$ ");
 		signal(SIGQUIT, signalhandler);
 	}
 	if (sig == SIGQUIT)

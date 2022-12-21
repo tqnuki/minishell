@@ -46,6 +46,13 @@ char	*get_value(char **lines, const char *key)
 	return ("");
 }
 
+// Takes args as a splitted command by ' ' ex : "echo / uwu / | / grep / u"
+// And line as the whole command ex : "echo uwu | grep u"
+
+// Takes : args = {"echo", "uwu", "|", "grep", "u"} line = "echo uwu | grep u"
+// Launch_executables takes : name = "grep" arguments = {"grep", "o"}
+
+// I Return : 1 = "grep" / 2 = {"grep", "o", "|", "grep", "i"}
 void	pipe_execute(char **args, char *line)
 {
 	int	fd[2];
