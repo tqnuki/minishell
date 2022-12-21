@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:59:40 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/20 11:08:29 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/21 09:13:04 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,52 @@
 
 t_shell	g_s;
 
-int	launch(char **args)
+#include <string.h>
+
+int launch_executable(const char *name, char *arguments[], char *line)
+{
+	char *path;
+	char *exec_path;
+	char *dir;
+
+	path = getenv("PATH");
+	if (path == NULL)
+	{
+    	printf("Error: PATH environment variable not set\n");
+    	return 1;
+  	}
+	dir = strtok(path, ":");
+	while (dir != NULL)
+	{
+		exec_path = malloc(1000);
+		ft_strcpy(exec_path, dir);
+    	ft_strlcat(exec_path, "/", 1000);
+   		ft_strlcat(exec_path, name, 1000);
+		if (access(exec_path, X_OK) == 0)
+		{
+			if (execve(exec_path, arguments, g_s.env) == -1)
+				perror("execve failed");
+			return (0);
+		}
+		dir = strtok(NULL, ":");
+	}
+	printf("Error: executable '%s' not found\n", name);
+	return (1);
+}
+
+int	launch(char **args, char *line)
 {
 	pid_t	pid;
 
 	pid = fork();
 	g_s.thing = 0;
-	prepend(args[0], "/bin/");
 	if (pid < 0)
 		perror("ERROR");
 	if (pid)
 		wait(NULL);
 	if (!pid)
 	{
-		g_s.thing = execve(args[0], args, g_s.env);
-		if (g_s.thing == -1)
-			perror("ERROR");
+		launch_executable(args[0], args, line);
 		exit(0);
 	}
 	return (1);
@@ -59,7 +89,7 @@ int	mini_execute(char **args, char *line)
 	else if (ft_strcmp(args[0], "env") == 0)
 		mini_env();
 	else
-		launch(args);
+		launch(args, line);
 	return (1);
 }
 
@@ -67,7 +97,7 @@ void	signalhandler(int sig)
 {
 	if (sig == SIGINT)
 	{
-		printf("\nbash-6.9.$ ");
+		printf("\n");
 		signal(SIGQUIT, signalhandler);
 	}
 	if (sig == SIGQUIT)

@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:34:01 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/20 11:08:16 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/20 13:14:2 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	pipe_execute(char **args, char *line)
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[0]);
 		close(fd[1]);
-		mini_execute(cupid(args[0]), args[0]);
+		launch_executable(ft_split(args[0], ' ')[0], ft_split(args[0], ' '), line);
 	}
 	pid2 = fork();
 	if (pid2 < 0)
@@ -74,7 +74,7 @@ void	pipe_execute(char **args, char *line)
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
 		close(fd[1]);
-		mini_execute(cupid(args[1]), args[1]);
+		launch_executable(ft_split(args[1], ' ')[0], ft_split(args[1], ' '), line);
 	}
 	close(fd[0]);
 	close(fd[1]);

@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 09:15:03 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/20 11:05:43 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/20 13:03:20 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,30 @@ char	**cupid(char *str)
 	rep[0] = ft_strdup(str);
 	rep[1] = NULL;
 	return (rep);
+}
+
+char *ft_strtok(char *str, const char *delim)
+{
+  static char *s = NULL;
+  if (str != NULL)
+    s = str;
+
+  if (s == NULL || *s == '\0')
+    return NULL;
+
+  size_t i = 0;
+  while (s[i] != '\0' && ft_strchr(delim, s[i]) == NULL)
+    i++;
+
+  if (s[i] == '\0')
+  {
+    char *temp = s;
+    s = NULL;
+    return temp;
+  }
+
+  s[i] = '\0';
+  char *temp = s;
+  s += i + 1;
+  return temp;
 }
