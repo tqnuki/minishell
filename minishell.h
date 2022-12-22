@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 07:55:19 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/22 11:04:14 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/22 16:48:55 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,27 @@ int		pippin(char *str, char **av);
 void	trim(char **av);
 char	**cupid(char *str);
 char	*ft_strtok(char *str, const char *delim);
-char *trim_quotes(char *s);
-int check_unclosed_quotes(char *s);
-void amongus(char **args);
-
+char	*trim_quotes(char *s);
+int		check_unclosed_quotes(char *s);
+void	amongus(char **args);
+int		echouwu(char **args);
+void	pipeslmao(char **args, char *line);
+void	sussy(char **args, char *line);
+char	**ft_first_tab_split(char **args, char *str);
+int		find_pos(char **av, char *str);
+void	sussy2(char **args);
+void	goofyahhfunction(char **args, int i, int q, char *str);
+int		launch2(char *dir, char *path, char *exec_path, char **arguments);
+int		launch3(char *name, int status, char **arguments, char *line);
 //redirection.c
 
 void	pipe_execute(char **args, char *line);
 void	right_arrow(char **args, char *line, int mode, char *arrow);
-
+void	sussy(char **args, char *line);
+void	sus(char *str);
+int		echouwu(char **args);
+void	amogus2(char *line, char **args, int i, char **tab);
+void	amongusahh(char **args, char *str, int k, int i);
 //single_split.c
 
 char	**ft_single_split(const char *str, char charset);

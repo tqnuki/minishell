@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 09:15:49 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/22 11:22:47 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/22 16:49:13 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,25 @@ extern t_shell	*g_s;
 // Launch_executables takes : name = "grep" arguments = {"grep", "o"}
 
 // I Return : 1 = "grep" / 2 = {"grep", "o", "|", "grep", "i"}
+
+int	fork_func(int fd[2], char **args, char *line, int num)
+{
+	int	pid;
+
+	pid = fork();
+	if (pid < 0)
+		perror("ERROR");
+	if (pid == 0)
+	{
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[0]);
+		close(fd[1]);
+		launch_executable(ft_split(args[num], ' ')[0], ft_split(args[num], ' '),
+			ft_strtrim(ft_single_split(line, '|')[1], " "));
+	}
+	return (pid);
+}
+
 void	pipe_execute(char **args, char *line)
 {
 	int	fd[2];
@@ -30,26 +49,8 @@ void	pipe_execute(char **args, char *line)
 	trim(args);
 	if (pipe(fd) == -1)
 		perror("ERROR");
-	pid1 = fork();
-	if (pid1 < 0)
-		perror("ERROR");
-	if (pid1 == 0)
-	{
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[0]);
-		close(fd[1]);
-		launch_executable(ft_split(args[0], ' ')[0], ft_split(args[0], ' '), ft_strtrim(ft_single_split(line, '|')[1], " "));
-	}
-	pid2 = fork();
-	if (pid2 < 0)
-		perror("ERROR");
-	if (pid2 == 0)
-	{
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]);
-		close(fd[1]);
-		launch_executable(ft_split(args[1], ' ')[0], ft_split(args[1], ' '), ft_strtrim(ft_single_split(line, '|')[1], " "));
-	}
+	pid1 = fork_func(fd, args, line, 0);
+	pid2 = fork_func(fd, args, line, 1);
 	close(fd[0]);
 	close(fd[1]);
 	waitpid(pid1, NULL, 0);
@@ -98,14 +99,17 @@ char	**ft_first_tab_split(char **args, char *str)
 
 void	right_arrow(char **args, char *line, int mode, char *arrow)
 {
-	int fd = open(args[find_pos(args, arrow) + 1], mode, 0777);
+	int	fd;
+	int	cpy;
 
+	fd = open(args[find_pos(args, arrow) + 1], mode, 0777);
 	if (fd < 0)
 		perror("ERROR");
-	int cpy = dup(1);
+	cpy = dup(STDIN_FILENO);
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
 	args = ft_first_tab_split(args, arrow);
 	g_s->thing = launch(args, ft_strtrim(ft_single_split(line, '>')[0], " "));
 	dup2(cpy, STDOUT_FILENO);
 }
+

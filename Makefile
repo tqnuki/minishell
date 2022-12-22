@@ -6,7 +6,7 @@
 #    By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/05 18:01:40 by mpankewi          #+#    #+#              #
-#    Updated: 2022/12/22 09:20:05 by mdoumi           ###   ########.fr        #
+#    Updated: 2022/12/22 16:24:37 by mdoumi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS    	= minishell.c \
 				utils2.c \
 				utils3.c \
 				utils4.c \
+				utils5.c \
 				redirection.c \
 				single_split.c
 

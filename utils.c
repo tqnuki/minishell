@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:11:50 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/21 16:50:24 by mpankewi         ###   ########.fr       */
+/*   Updated: 2022/12/22 16:33:36 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	goofyahh(char **args)
 
 int	ft_strcmp(char *str1, char *str2)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str1[i] && str2[i])
