@@ -1,8 +1,8 @@
-DO :
+TODO :
 
-- Redirections
-- echo "'$USER'" --> '$USER'
+- Redirections:
+    <
+    >>
+    >
+- Detect redirections and pipes when they are in same word ex : "echo uwu>txt.txt"
 
-FINISH :
-
-- Redirections create file uwu test.c

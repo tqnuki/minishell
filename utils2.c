@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:29:22 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/22 07:27:00 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/22 10:46:56 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,21 @@ void	goofyahh2(char **args, int i, char *str)
 				while (args[i][k] && args[i][k] != '$')
 					printf("%c", args[i][k++]);
 				k++;
-				while (args[i][k] && ft_isalnum(args[i][k]))
+				while (args[i][k])
 				{
-					if(q && k == ft_strlen(args[i]) - 1)
-						break;
+					if (!ft_isalnum(args[i][k]))
+					{
+						printf("%s", get_value(g_s->env, str));
+						while(args[i])
+						{
+							if(q && k == ft_strlen(args[i]) - 1)
+								break;
+							printf("%c", args[i][k++]);
+						}
+					}
 					str[l++] = args[i][k++];
+					if(k == ft_strlen(args[i]) - 1)
+						break;
 				}
 				printf("%s", get_value(g_s->env, str));
 			}

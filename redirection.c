@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 09:15:49 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/22 10:13:36 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/22 11:22:47 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,16 +96,16 @@ char	**ft_first_tab_split(char **args, char *str)
 	return (rep);
 }
 
-void	right_arrow(char **args, char *line)
+void	right_arrow(char **args, char *line, int mode, char *arrow)
 {
-	int fd = open(args[find_pos(args, ">") + 1], O_RDWR | O_CREAT | O_TRUNC, 0777);
+	int fd = open(args[find_pos(args, arrow) + 1], mode, 0777);
 
 	if (fd < 0)
 		perror("ERROR");
 	int cpy = dup(1);
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
-	args = ft_first_tab_split(args, ">");
-	g_s->thing = launch(args, ft_strtrim(ft_single_split(line, '>')[1], " "));
+	args = ft_first_tab_split(args, arrow);
+	g_s->thing = launch(args, ft_strtrim(ft_single_split(line, '>')[0], " "));
 	dup2(cpy, STDOUT_FILENO);
 }

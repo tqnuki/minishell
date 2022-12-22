@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 07:55:19 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/22 09:19:47 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/22 11:04:14 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,12 @@ char	**cupid(char *str);
 char	*ft_strtok(char *str, const char *delim);
 char *trim_quotes(char *s);
 int check_unclosed_quotes(char *s);
+void amongus(char **args);
 
 //redirection.c
 
 void	pipe_execute(char **args, char *line);
-void	right_arrow(char **args, char *line);
+void	right_arrow(char **args, char *line, int mode, char *arrow);
 
 //single_split.c
 

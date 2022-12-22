@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 09:15:03 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/21 16:21:50 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/22 11:10:49 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	pippin(char *str, char **av)
 
 	i = -1;
 	while (av[++i])
-		if (av[i][0] == str[0] && av[i][1] == '\0' && str[1] == '\0')
+		if (ft_strcmp(av[i], str) == 0)
 			return (1);
 	return (0);
 }
@@ -98,4 +98,38 @@ int check_unclosed_quotes(char *s) {
     }
   }
   return 0;
+}
+
+void amongus(char **args)
+{
+  int i;
+  int j;
+  char **tab = malloc(10000);
+  char *line;
+
+  j = 0;
+  i = 0;
+  while(args[i] && ft_strcmp(args[i], "<<") != 0)
+    i++;
+  i++;
+  while (1)
+  {
+    line = readline("amongus> ");
+    if (ft_strcmp(line, args[i]) == 0)
+    {
+      j = 0;
+      while (tab[j])
+        printf("%s\n", tab[j++]);
+      free(tab);
+      break;
+    }
+    tab[j] = line;
+    j++;
+  }
+  i = 0;
+  while(args[i] && ft_strcmp(args[i], "<<") != 0)
+    i++;
+  while(args[i])
+    args[i++] = NULL;
+  mini_execute(args, "");
 }
