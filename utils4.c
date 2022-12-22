@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 09:15:03 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/22 11:10:49 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/22 11:26:42 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void amongus(char **args)
   i++;
   while (1)
   {
-    line = readline("amongus> ");
+    line = readline("amogus ඞ ");
     if (ft_strcmp(line, args[i]) == 0)
     {
       j = 0;

@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:59:40 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/22 11:20:39 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/22 12:11:17 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,17 @@ int launch(char **args, char *line)
     return 1;
 }
 
+void sussy(char **args)
+{
+    char *buf = malloc(10);
+    int rd;
+    int fd = open(args[1], O_RDONLY);
+    while(rd && rd != -1)
+    {
+        rd = read(fd, buf, 1);
+        printf("%s", buf);
+    }
+}
 
 int	mini_execute(char **args, char *line)
 {
@@ -103,6 +114,8 @@ int	mini_execute(char **args, char *line)
 		exit(0);
 	else if (pippin("|", args) == 1)
 		pipe_execute(args, line);
+    else if (pippin("<", args) == 1)
+        sussy(args);
 	else if (pippin(">", args) == 1)
 		right_arrow(args, line, O_WRONLY | O_CREAT | O_TRUNC, ">");
 	else if (pippin(">>", args) == 1)
