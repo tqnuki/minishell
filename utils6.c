@@ -6,7 +6,7 @@
 /*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 17:05:24 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/22 17:36:19 by mpankewi         ###   ########.fr       */
+/*   Updated: 2022/12/22 17:37:38 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	launch2(char *dir, char *name, char *exec_path, char **arguments)
 	}
 	return (1);
 }
+
 
 int	launch3(char *name, int status, char **arguments, char *line)
 {
