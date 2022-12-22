@@ -6,7 +6,7 @@
 /*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 17:05:24 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/22 17:05:27 by mpankewi         ###   ########.fr       */
+/*   Updated: 2022/12/22 17:20:50 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,14 @@ int	launch3(char *name, int status, char **arguments, char *line)
 	return (69);
 }
 
-void	amongusahh(char **args, char *str, int q, int i)
+void	amongusahh(char **args, char *str, int i)
 {
 	int	l;
 	int	k;
 
 	k = 0;
 	l = 0;
-	if (q)
+	if (g_s->q)
 		k++;
 	if (ft_strcmp((args[i]), "$?") == 0)
 		printf("%d", g_s->thing);
@@ -99,7 +99,6 @@ void	amongusahh(char **args, char *str, int q, int i)
 		while (args[i][k] && args[i][k] != '$')
 			printf("%c", args[i][k++]);
 		k++;
-		g_s->q = q;
 		wtfisthisfunction(args, str, k, i);
 		printf("%s", get_value(g_s->env, str));
 	}

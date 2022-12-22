@@ -6,7 +6,7 @@
 /*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 07:55:19 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/22 17:03:50 by mpankewi         ###   ########.fr       */
+/*   Updated: 2022/12/22 17:21:15 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_shell
 	char	**env;
 	int		thing;
 	int		q;
+	int		sq;
 }		t_shell;
 
 //builtin.c
@@ -82,7 +83,7 @@ void	sussy(char **args, char *line);
 char	**ft_first_tab_split(char **args, char *str);
 int		find_pos(char **av, char *str);
 void	sussy2(char **args);
-void	goofyahhfunction(char **args, int i, int q, char *str);
+void	goofyahhfunction(char **args, int i, char *str);
 int		launch2(char *dir, char *path, char *exec_path, char **arguments);
 int		launch3(char *name, int status, char **arguments, char *line);
 void	wtfisthisfunction(char **args, char *str, int k, int i);
@@ -94,7 +95,7 @@ void	sussy(char **args, char *line);
 void	sus(char *str);
 int		echouwu(char **args);
 void	amogus2(char *line, char **args, int i, char **tab);
-void	amongusahh(char **args, char *str, int k, int i);
+void	amongusahh(char **args, char *str, int i);
 //single_split.c
 
 char	**ft_single_split(const char *str, char charset);

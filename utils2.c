@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 16:43:58 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/22 16:43:59 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/22 17:21:42 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,18 @@ void	delete_char_ptr(char **str_arr, char *str)
 
 void	goofyahh2(char **args, int i, char *str)
 {
-	int	q;
-	int	sq;
-
-	q = 0;
-	sq = 0;
+	g_s->sq = 0;
+	g_s->q = 0;
 	if (args[i])
 	{
 		if (args[i][0] == '"')
-			q = 1;
+			g_s->q = 1;
 		if (args[i][0] == '\'')
-			sq = 1;
+			g_s->sq = 1;
 	}
 	while (args[i])
 	{
-		goofyahhfunction(args, i, q, str);
+		goofyahhfunction(args, i, str);
 		if (args[i +1])
 			printf(" ");
 		i++;

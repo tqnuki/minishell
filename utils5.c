@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 16:29:53 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/22 16:51:41 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/22 17:20:30 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,19 +73,15 @@ void	sussy(char **args, char *line)
 		sussy2(args);
 }
 
-void	goofyahhfunction(char **args, int i, int q, char *str)
+void	goofyahhfunction(char **args, int i, char *str)
 {
-	int		sq;
-
-	if (args[i][0] == '\'')
-		sq = 1;
-	if (isdollar(args[i]) && !sq)
+	if (isdollar(args[i]) && !g_s->sq)
 	{
-		amongusahh(args, str, q, i);
+		amongusahh(args, str, i);
 	}
 	else
 	{
-		if (sq || q)
+		if (g_s->sq ||g_s-> q)
 			sus(args[i]);
 		else
 			printf("%s", args[i]);
