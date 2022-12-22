@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:59:40 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/21 17:24:07 by mpankewi         ###   ########.fr       */
+/*   Updated: 2022/12/22 09:17:52 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int launch_executable(char *name, char *arguments[], char *line)
     }
     if (pippin("|", arguments) == 1)
     {
-        pipe_execute(arguments, ft_strtrim(ft_single_split(line, '|')[1], " "));
+        pipe_execute(arguments, line);
         return 0;
     }
     path = get_value(g_s->env, "PATH");
@@ -103,6 +103,8 @@ int	mini_execute(char **args, char *line)
 		exit(0);
 	else if (pippin("|", args) == 1)
 		pipe_execute(args, line);
+	else if (pippin(">", args) == 1)
+		right_arrow(args, line);
 	else if (ft_strcmp(args[0], "cd") == 0)
 		mini_cd(args);
 	else if (ft_strcmp(args[0], "echo") == 0)

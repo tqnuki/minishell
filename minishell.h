@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 07:55:19 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/22 07:18:37 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/22 09:19:47 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <signal.h>
 # include <unistd.h>
 # include <sys/wait.h>
+# include <fcntl.h>
 # include "libft/libft.h"
 
 typedef struct s_shell
@@ -64,7 +65,6 @@ void	mini_unset(char *str);
 
 char	*trim_until_slash(char *str);
 char	*get_value(char **lines, const char *key);
-void	pipe_execute(char **args, char *line);
 
 //utils4.c
 
@@ -74,6 +74,11 @@ char	**cupid(char *str);
 char	*ft_strtok(char *str, const char *delim);
 char *trim_quotes(char *s);
 int check_unclosed_quotes(char *s);
+
+//redirection.c
+
+void	pipe_execute(char **args, char *line);
+void	right_arrow(char **args, char *line);
 
 //single_split.c
 
