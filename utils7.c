@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils7.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/22 16:52:49 by mdoumi            #+#    #+#             */
+/*   Updated: 2022/12/22 16:54:40 by mdoumi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-extern t_shell *g_s;
+extern t_shell	*g_s;
 
 int	echouwu(char **args)
 {
@@ -66,5 +78,25 @@ void	sussy2(char **args)
 	{
 		rd = read(fd, buf, 1);
 		printf("%s", buf);
+	}
+}
+
+void    wtfisthisfunction(char **args, char *str, int q, int i)
+{
+    while (args[i][k])
+	{
+		if (!ft_isalnum(args[i][k]))
+		{
+			printf("%s", get_value(g_s->env, str));
+			while (args[i])
+			{
+				if (q && k == ft_strlen(args[i]) - 1)
+					break ;
+				printf("%c", args[i][k++]);
+			}
+		}
+		str[l++] = args[i][k++];
+		if (k == ft_strlen(args[i]) - 1)
+			break ;
 	}
 }

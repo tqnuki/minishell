@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 16:29:53 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/22 16:49:45 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/22 16:51:41 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	launch_executable(char *name, char *arguments[], char *line)
 		printf("Error: PATH environment variable not set\n");
 		return (1);
 	}
-	return (launch2(dir, path, exec_path, arguments));
+	return (launch2(dir, name, exec_path, arguments));
 	printf("Error: executable '%s' not found\n", name);
 	return (1);
 }

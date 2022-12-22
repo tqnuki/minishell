@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 09:15:49 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/22 16:49:13 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/22 16:52:15 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,4 +112,3 @@ void	right_arrow(char **args, char *line, int mode, char *arrow)
 	g_s->thing = launch(args, ft_strtrim(ft_single_split(line, '>')[0], " "));
 	dup2(cpy, STDOUT_FILENO);
 }
-

@@ -34,11 +34,13 @@ void	amogus2(char *line, char **args, int i, char **tab)
 	}
 }
 
-int launch2(char *dir, char *path, char *exec_path, char **arguments)
+int launch2(char *dir, char *name, char *exec_path, char **arguments)
 {
 	int status;
+    char *path;
 
 	status = 0;
+    path = get_value(g_s->env, "PATH");
 	dir = ft_strtok(path, ":");
 	while (dir != NULL)
 	{
@@ -58,6 +60,7 @@ int launch2(char *dir, char *path, char *exec_path, char **arguments)
 		}
 		dir = ft_strtok(NULL, ":");
 	}
+    return (1);
 }
 
 int launch3(char *name, int status, char **arguments, char *line)
@@ -80,11 +83,15 @@ int launch3(char *name, int status, char **arguments, char *line)
 	return (69);
 }
 
-void	amongusahh(char **args, char *str, int k, int i)
+void	amongusahh(char **args, char *str, int q, int i)
 {
 	int l;
+    int k;
 
+    k = 0;
 	l = 0;
+    if (q)
+        k++;
 	if (ft_strcmp((args[i]), "$?") == 0)
 		printf("%d", g_s->thing);
 	else
@@ -92,22 +99,7 @@ void	amongusahh(char **args, char *str, int k, int i)
 		while (args[i][k] && args[i][k] != '$')
 			printf("%c", args[i][k++]);
 		k++;
-		while (args[i][k])
-		{
-			if (!ft_isalnum(args[i][k]))
-			{
-				printf("%s", get_value(g_s->env, str));
-				while (args[i])
-				{
-					if (q && k == ft_strlen(args[i]) - 1)
-						break ;
-					printf("%c", args[i][k++]);
-				}
-			}
-			str[l++] = args[i][k++];
-			if (k == ft_strlen(args[i]) - 1)
-				break ;
-		}
+        wtfisthisfunction()
 		printf("%s", get_value(g_s->env, str));
 	}
 }
