@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:29:22 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/21 17:26:57 by mpankewi         ###   ########.fr       */
+/*   Updated: 2022/12/22 07:27:00 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ void	mini_unset(char *str)
 	if(!str)
 		return ;
 	while (g_s->env[++i])
-		if (ft_strncmp(g_s->env[i], str, ft_strlen(str)) == 0)
+		if (ft_strcmp(ft_split(g_s->env[i], '=')[0], str) == 0)
 		{
 			boul = 1;
 			break ;

@@ -1,6 +1,7 @@
 DO :
 
 - Redirections
+- echo "'$USER'" --> '$USER'
 
 FINISH :
 

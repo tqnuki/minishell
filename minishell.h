@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 07:55:19 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/21 16:50:45 by mpankewi         ###   ########.fr       */
+/*   Updated: 2022/12/22 07:18:37 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ int		pippin(char *str, char **av);
 void	trim(char **av);
 char	**cupid(char *str);
 char	*ft_strtok(char *str, const char *delim);
+char *trim_quotes(char *s);
+int check_unclosed_quotes(char *s);
 
 //single_split.c
 
 char	**ft_single_split(const char *str, char charset);
-char *trim_quotes(char *s);
-int check_unclosed_quotes(char *s);
 #endif
