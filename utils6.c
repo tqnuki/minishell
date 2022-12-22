@@ -1,22 +1,22 @@
 /* ************************************************************************** */
-/*																			  */
-/*														  :::	   ::::::::   */
-/*	 utils6.c											:+:		 :+:	:+:   */
-/*													  +:+ +:+		  +:+	  */
-/*	 By: mdoumi <marvin@42.fr>						+#+  +:+	   +#+		  */
-/*												  +#+#+#+#+#+	+#+			  */
-/*	 Created: 2022/12/22 16:27:34 by mdoumi			   #+#	  #+#			  */
-/*	 Updated: 2022/12/22 16:45:46 by mdoumi			  ###	########.fr		  */
-/*																			  */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils6.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/22 17:05:24 by mpankewi          #+#    #+#             */
+/*   Updated: 2022/12/22 17:05:27 by mpankewi         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_shell  *g_s;
+extern t_shell	*g_s;
 
 void	amogus2(char *line, char **args, int i, char **tab)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (1)
@@ -34,13 +34,13 @@ void	amogus2(char *line, char **args, int i, char **tab)
 	}
 }
 
-int launch2(char *dir, char *name, char *exec_path, char **arguments)
+int	launch2(char *dir, char *name, char *exec_path, char **arguments)
 {
-	int status;
-    char *path;
+	int		status;
+	char	*path;
 
 	status = 0;
-    path = get_value(g_s->env, "PATH");
+	path = get_value(g_s->env, "PATH");
 	dir = ft_strtok(path, ":");
 	while (dir != NULL)
 	{
@@ -60,10 +60,10 @@ int launch2(char *dir, char *name, char *exec_path, char **arguments)
 		}
 		dir = ft_strtok(NULL, ":");
 	}
-    return (1);
+	return (1);
 }
 
-int launch3(char *name, int status, char **arguments, char *line)
+int	launch3(char *name, int status, char **arguments, char *line)
 {
 	if (name[0] == '/')
 	{
@@ -85,13 +85,13 @@ int launch3(char *name, int status, char **arguments, char *line)
 
 void	amongusahh(char **args, char *str, int q, int i)
 {
-	int l;
-    int k;
+	int	l;
+	int	k;
 
-    k = 0;
+	k = 0;
 	l = 0;
-    if (q)
-        k++;
+	if (q)
+		k++;
 	if (ft_strcmp((args[i]), "$?") == 0)
 		printf("%d", g_s->thing);
 	else
@@ -99,7 +99,8 @@ void	amongusahh(char **args, char *str, int q, int i)
 		while (args[i][k] && args[i][k] != '$')
 			printf("%c", args[i][k++]);
 		k++;
-        wtfisthisfunction()
+		g_s->q = q;
+		wtfisthisfunction(args, str, k, i);
 		printf("%s", get_value(g_s->env, str));
 	}
 }

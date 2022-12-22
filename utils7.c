@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils7.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 16:52:49 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/22 16:54:40 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/22 17:04:33 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,19 @@ void	sussy2(char **args)
 	}
 }
 
-void    wtfisthisfunction(char **args, char *str, int q, int i)
+void	wtfisthisfunction(char **args, char *str, int k, int i)
 {
-    while (args[i][k])
+	int	l;
+
+	l = 0;
+	while (args[i][k])
 	{
 		if (!ft_isalnum(args[i][k]))
 		{
 			printf("%s", get_value(g_s->env, str));
 			while (args[i])
 			{
-				if (q && k == ft_strlen(args[i]) - 1)
+				if (g_s->q && k == ft_strlen(args[i]) - 1)
 					break ;
 				printf("%c", args[i][k++]);
 			}
