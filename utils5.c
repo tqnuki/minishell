@@ -6,7 +6,7 @@
 /*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 16:29:53 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/22 17:20:30 by mpankewi         ###   ########.fr       */
+/*   Updated: 2022/12/22 17:25:54 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ extern t_shell	*g_s;
 
 int	launch_executable(char *name, char *arguments[], char *line)
 {
-	char	*path;
 	char	*exec_path;
 	char	*dir;
 	char	**tmp;
@@ -26,12 +25,6 @@ int	launch_executable(char *name, char *arguments[], char *line)
 	status = launch3(name, status, arguments, line);
 	if (status != 69)
 		return (status);
-	path = get_value(g_s->env, "PATH");
-	if (path == NULL)
-	{
-		printf("Error: PATH environment variable not set\n");
-		return (1);
-	}
 	return (launch2(dir, name, exec_path, arguments));
 	printf("Error: executable '%s' not found\n", name);
 	return (1);
