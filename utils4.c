@@ -6,7 +6,7 @@
 /*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 11:04:36 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/23 11:09:36 by mpankewi         ###   ########.fr       */
+/*   Updated: 2022/12/23 11:15:30 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,4 @@ void	amongus(char **args)
 		i++;
 	i++;
 	amogus2(line, args, i, tab);
-	i = 0;
-	while (args[i++])
-		if (ft_strcmp(args[i], "<<") == 0)
-			while (args[i])
-				args[i++] = NULL;
-	mini_execute(args, "");
 }

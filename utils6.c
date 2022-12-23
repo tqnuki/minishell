@@ -6,7 +6,7 @@
 /*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 10:58:13 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/23 11:03:57 by mpankewi         ###   ########.fr       */
+/*   Updated: 2022/12/23 11:43:09 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	amogus2(char *line, char **args, int i, char **tab)
 			while (tab[j])
 				printf("%s\n", tab[j++]);
 			free(tab);
-			break ;
+			return ;
 		}
 		tab[j++] = line;
 	}
