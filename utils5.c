@@ -6,29 +6,13 @@
 /*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 16:29:53 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/22 17:25:54 by mpankewi         ###   ########.fr       */
+/*   Updated: 2022/12/23 10:57:07 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_shell	*g_s;
-
-int	launch_executable(char *name, char *arguments[], char *line)
-{
-	char	*exec_path;
-	char	*dir;
-	char	**tmp;
-	int		status;
-
-	status = 0;
-	status = launch3(name, status, arguments, line);
-	if (status != 69)
-		return (status);
-	return (launch2(dir, name, exec_path, arguments));
-	printf("Error: executable '%s' not found\n", name);
-	return (1);
-}
 
 void	pipeslmao(char **args, char *line)
 {
@@ -74,7 +58,7 @@ void	goofyahhfunction(char **args, int i, char *str)
 	}
 	else
 	{
-		if (g_s->sq ||g_s-> q)
+		if (g_s->sq || g_s-> q)
 			sus(args[i]);
 		else
 			printf("%s", args[i]);

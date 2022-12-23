@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/22 16:26:47 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/22 16:45:32 by mdoumi           ###   ########.fr       */
+/*   Created: 2022/12/23 11:04:36 by mpankewi          #+#    #+#             */
+/*   Updated: 2022/12/23 11:09:36 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,28 +47,30 @@ char	**cupid(char *str)
 
 char	*ft_strtok(char *str, const char *delim)
 {
-	static char	*s;
-	size_t		i;
-	char		*temp;
+	static char	*saved_str;
+	char		*start;
+	char		*end;
 
-	i = 0;
-	s = NULL;
-	if (str != NULL)
-		s = str;
-	if (s == NULL || *s == '\0')
+	if (str == NULL)
+		str = saved_str;
+	if (str == NULL)
 		return (NULL);
-	while (s[i] != '\0' && ft_strchr(delim, s[i]) == NULL)
-		i++;
-	if (s[i] == '\0')
+	start = str;
+	while (*start && ft_strchr(delim, *start))
+		start++;
+	if (!*start)
+		return (saved_str = NULL);
+	end = start;
+	while (*end && !ft_strchr(delim, *end))
+		end++;
+	if (*end != '\0')
 	{
-		temp = s;
-		s = NULL;
-		return (temp);
+		*end = '\0';
+		saved_str = end + 1;
 	}
-	s[i] = '\0';
-	temp = s;
-	s += i + 1;
-	return (temp);
+	else
+		saved_str = NULL;
+	return (start);
 }
 
 void	amongus(char **args)

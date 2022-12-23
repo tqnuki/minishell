@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/22 17:05:24 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/22 17:37:38 by mpankewi         ###   ########.fr       */
+/*   Created: 2022/12/23 10:58:13 by mpankewi          #+#    #+#             */
+/*   Updated: 2022/12/23 11:03:57 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,56 +34,6 @@ void	amogus2(char *line, char **args, int i, char **tab)
 	}
 }
 
-int	launch2(char *dir, char *name, char *exec_path, char **arguments)
-{
-	int		status;
-	char	*path;
-
-	status = 0;
-	path = get_value(g_s->env, "PATH");
-	dir = ft_strtok(path, ":");
-	while (dir != NULL)
-	{
-		exec_path = malloc(1000);
-		ft_strcpy(exec_path, dir);
-		ft_strlcat(exec_path, "/", 1000);
-		ft_strlcat(exec_path, name, 1000);
-		if (access(exec_path, X_OK) == 0)
-		{
-			status = execve(exec_path, arguments, g_s->env);
-			if (status == -1)
-			{
-				perror("execve failed");
-				return (1);
-			}
-			return (status);
-		}
-		dir = ft_strtok(NULL, ":");
-	}
-	return (1);
-}
-
-
-int	launch3(char *name, int status, char **arguments, char *line)
-{
-	if (name[0] == '/')
-	{
-		status = execve(name, arguments, g_s->env);
-		if (status == -1)
-		{
-			perror("execve failed");
-			return (1);
-		}
-		return (status);
-	}
-	if (pippin("|", arguments) == 1)
-	{
-		pipe_execute(arguments, line);
-		return (0);
-	}
-	return (69);
-}
-
 void	amongusahh(char **args, char *str, int i)
 {
 	int	l;
@@ -103,4 +53,73 @@ void	amongusahh(char **args, char *str, int i)
 		wtfisthisfunction(args, str, k, i);
 		printf("%s", get_value(g_s->env, str));
 	}
+}
+
+int	launchexec(char *exec_path, char **arguments, int status)
+{
+	if (access(exec_path, X_OK) == 0)
+	{
+		status = execve(exec_path, arguments, g_s->env);
+		if (status == -1)
+		{
+			printf("execve failed");
+			return (1);
+		}
+		return (status);
+	}
+	return (69);
+}
+
+int	launchex(char **arguments, char *name, char *path, char *exec_path)
+{
+	char	*dir;
+	int		status;
+
+	path = get_value(g_s->env, "PATH");
+	if (path == NULL)
+	{
+		printf("Error: PATH environment variable not set\n");
+		return (1);
+	}
+	dir = ft_strtok(path, ":");
+	while (1)
+	{
+		exec_path = malloc(1000);
+		ft_strcpy(exec_path, dir);
+		ft_strlcat(exec_path, "/", 1000);
+		ft_strlcat(exec_path, name, 1000);
+		status = launchexec(exec_path, arguments, status);
+		if (status != 69)
+			return (status);
+		dir = ft_strtok(NULL, ":");
+	}
+	printf("Error: executable '%s' not found\n", name);
+	return (1);
+}
+
+int	launch_executable(char *name, char *arguments[], char *line)
+{
+	char	*path;
+	char	*exec_path;
+	char	*dir;
+	char	**tmp;
+	int		status;
+
+	status = 0;
+	if (name[0] == '/')
+	{
+		status = execve(name, arguments, g_s->env);
+		if (status == -1)
+		{
+			perror("execve failed");
+			return (1);
+		}
+		return (status);
+	}
+	if (pippin("|", arguments) == 1)
+	{
+		pipe_execute(arguments, ft_strtrim(ft_single_split(line, '|')[1], " "));
+		return (0);
+	}
+	return (launchex(arguments, name, path, exec_path));
 }

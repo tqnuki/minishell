@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/19 07:55:19 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/22 17:21:15 by mpankewi         ###   ########.fr       */
+/*   Created: 2022/12/23 10:58:05 by mpankewi          #+#    #+#             */
+/*   Updated: 2022/12/23 10:58:10 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ char	**ft_first_tab_split(char **args, char *str);
 int		find_pos(char **av, char *str);
 void	sussy2(char **args);
 void	goofyahhfunction(char **args, int i, char *str);
-int		launch2(char *dir, char *path, char *exec_path, char **arguments);
-int		launch3(char *name, int status, char **arguments, char *line);
 void	wtfisthisfunction(char **args, char *str, int k, int i);
+int		launchexec(char *exec_path, char **arguments, int status);
+int		launchex(char **arguments, char *name, char *path, char *exec_path);
 //redirection.c
 
 void	pipe_execute(char **args, char *line);
