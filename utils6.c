@@ -6,7 +6,7 @@
 /*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 10:58:13 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/23 11:43:09 by mpankewi         ###   ########.fr       */
+/*   Updated: 2022/12/23 15:40:48 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int	launch_executable(char *name, char *arguments[], char *line)
 	}
 	if (pippin("|", arguments) == 1)
 	{
-		pipe_execute(arguments, ft_strtrim(ft_single_split(line, '|')[1], " "));
+		exit(0);
 		return (0);
 	}
 	return (launchex(arguments, name, path, exec_path));

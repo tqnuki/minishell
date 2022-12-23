@@ -45,3 +45,38 @@ char	*get_value(char **lines, const char *key)
 	}
 	return ("");
 }
+
+void	goofyahhfunction(char **args, int i, char *str)
+{
+	if (isdollar(args[i]) && !g_s->sq)
+	{
+		amongusahh(args, str, i);
+	}
+	else
+	{
+		if (g_s->sq || g_s-> q)
+			sus(args[i]);
+		else
+			printf("%s", args[i]);
+	}
+}
+
+void	sus(char *str)
+{
+	size_t	i;
+	size_t	len;
+
+	i = 1;
+	len = ft_strlen(str);
+	if (len > 2)
+	{
+		while (i < len - 1)
+		{
+			printf("%c", str[i++]);
+		}
+	}
+	else
+	{
+		printf("%s", str);
+	}
+}

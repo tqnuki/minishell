@@ -6,7 +6,7 @@
 /*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 09:15:49 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/23 12:05:53 by mpankewi         ###   ########.fr       */
+/*   Updated: 2022/12/23 16:00:28 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,45 +21,9 @@ extern t_shell	*g_s;
 
 // I Return : 1 = "grep" / 2 = {"grep", "o", "|", "grep", "i"}
 
-int	fork_func(int fd[2], char **args, char *line, int num)
-{
-	int	pid;
-
-	pid = fork();
-	if (pid < 0)
-		perror("ERROR");
-	if (pid == 0)
-	{
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[0]);
-		close(fd[1]);
-		launch_executable(ft_split(args[num], ' ')[0], ft_split(args[num], ' '),
-			ft_strtrim(ft_single_split(line, '|')[1], " "));
-	}
-	return (pid);
-}
-
-void	pipe_execute(char **args, char *line)
-{
-	int	fd[2];
-	int	pid1;
-	int	pid2;
-
-	args = ft_single_split(line, '|');
-	trim(args);
-	if (pipe(fd) == -1)
-		perror("ERROR");
-	pid1 = fork_func(fd, args, line, 0);
-	pid2 = fork_func(fd, args, line, 1);
-	close(fd[0]);
-	close(fd[1]);
-	waitpid(pid1, NULL, 0);
-	waitpid(pid2, NULL, 0);
-	return ;
-}
-
 //Creer le fichier juste apres la redirection
 //<< end cat > out
+
 int	find_pos(char **av, char *str)
 {
 	int	i;

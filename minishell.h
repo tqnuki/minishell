@@ -6,7 +6,7 @@
 /*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 10:58:05 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/23 10:58:10 by mpankewi         ###   ########.fr       */
+/*   Updated: 2022/12/23 14:43:50 by mpankewi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int		launchexec(char *exec_path, char **arguments, int status);
 int		launchex(char **arguments, char *name, char *path, char *exec_path);
 //redirection.c
 
-void	pipe_execute(char **args, char *line);
+void	pipe_executee(char **args, char *line);
 void	right_arrow(char **args, char *line, int mode, char *arrow);
 void	sussy(char **args, char *line);
 void	sus(char *str);
