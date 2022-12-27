@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:59:40 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/27 11:03:17 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/27 11:12:49 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,9 +142,15 @@ int	mini_execute(char **args, char *line)
     else if (pippin("<", args) == 1)
         sussy(args, line);
 	else if (pippin(">", args) == 1)
+	{
+		printf("L:MAO 1\n");
 		right_arrow(args, line, O_WRONLY | O_CREAT | O_TRUNC, ">");
+	}
 	else if (pippin(">>", args) == 1)
+	{
+		printf("L:MAO 2\n");
 		right_arrow(args, line, O_RDWR | O_CREAT | O_APPEND, ">>");
+	}
     else if (pippin("<<", args) == 1)
         amongus(args);
 	else if (ft_strcmp(args[0], "cd") == 0)

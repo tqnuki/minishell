@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 09:15:03 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/22 11:26:42 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/27 12:17:02 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,30 +45,29 @@ char	**cupid(char *str)
 	return (rep);
 }
 
-char *ft_strtok(char *str, const char *delim)
+char	*ft_strtok(char *str, const char *delim)
 {
-  static char *s = NULL;
-  if (str != NULL)
-    s = str;
+	static char	*s = NULL;
+	char		*temp;
+	size_t		i;
 
-  if (s == NULL || *s == '\0')
-    return NULL;
-
-  size_t i = 0;
-  while (s[i] != '\0' && ft_strchr(delim, s[i]) == NULL)
-    i++;
-
-  if (s[i] == '\0')
-  {
-    char *temp = s;
-    s = NULL;
-    return temp;
-  }
-
-  s[i] = '\0';
-  char *temp = s;
-  s += i + 1;
-  return temp;
+	i = 0;
+	if (str != NULL)
+		s = str;
+	if (s == NULL || *s == '\0')
+		return (NULL);
+	while (s[i] != '\0' && ft_strchr(delim, s[i]) == NULL)
+		i++;
+	if (s[i] == '\0')
+	{
+		temp = s;
+		s = NULL;
+		return (temp);
+	}
+	s[i] = '\0';
+	temp = s;
+	s += i + 1;
+	return temp;
 }
 
 char *trim_quotes(char *s) {
