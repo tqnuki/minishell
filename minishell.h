@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 07:55:19 by mdoumi            #+#    #+#             */
-/*   Updated: 2022/12/22 11:04:14 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/27 10:58:38by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,12 @@ void	right_arrow(char **args, char *line, int mode, char *arrow);
 //single_split.c
 
 char	**ft_single_split(const char *str, char charset);
+
+
+
+int	find_pos(char **av, char *str);
+char	**ft_first_tab_split(char **args, char *str);
+void	sussy2(char **args);
+void	sussy(char **args, char *line);
+
 #endif

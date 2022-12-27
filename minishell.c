@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:59:40 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/27 10:56:12 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/27 11:03:17 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ int	mini_execute(char **args, char *line)
 	else if (pippin("|", args) == 1)
 		pipe_execute(args, line);
     else if (pippin("<", args) == 1)
-        sussy(args);
+        sussy(args, line);
 	else if (pippin(">", args) == 1)
 		right_arrow(args, line, O_WRONLY | O_CREAT | O_TRUNC, ">");
 	else if (pippin(">>", args) == 1)
