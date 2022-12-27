@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpankewi <mpankewi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/23 11:04:36 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/23 11:15:30 by mpankewi         ###   ########.fr       */
+/*   Created: 2022/12/20 09:15:03 by mdoumi            #+#    #+#             */
+/*   Updated: 2022/12/22 11:26:42 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,45 +45,91 @@ char	**cupid(char *str)
 	return (rep);
 }
 
-char	*ft_strtok(char *str, const char *delim)
+char *ft_strtok(char *str, const char *delim)
 {
-	static char	*saved_str;
-	char		*start;
-	char		*end;
+  static char *s = NULL;
+  if (str != NULL)
+    s = str;
 
-	if (str == NULL)
-		str = saved_str;
-	if (str == NULL)
-		return (NULL);
-	start = str;
-	while (*start && ft_strchr(delim, *start))
-		start++;
-	if (!*start)
-		return (saved_str = NULL);
-	end = start;
-	while (*end && !ft_strchr(delim, *end))
-		end++;
-	if (*end != '\0')
-	{
-		*end = '\0';
-		saved_str = end + 1;
-	}
-	else
-		saved_str = NULL;
-	return (start);
+  if (s == NULL || *s == '\0')
+    return NULL;
+
+  size_t i = 0;
+  while (s[i] != '\0' && ft_strchr(delim, s[i]) == NULL)
+    i++;
+
+  if (s[i] == '\0')
+  {
+    char *temp = s;
+    s = NULL;
+    return temp;
+  }
+
+  s[i] = '\0';
+  char *temp = s;
+  s += i + 1;
+  return temp;
 }
 
-void	amongus(char **args)
-{
-	int		i;
-	int		j;
-	char	**tab;
-	char	*line;
+char *trim_quotes(char *s) {
+  int len = ft_strlen(s);
+  if (s[0] == '\'' || s[0] == '"') {
+    if (s[0] == s[len - 1]) {
+      s[len - 1] = '\0';
+      return s + 1;
+    }
+    else
+    {
+      printf("Error: unclosed quotes\n");
+      return(NULL);
+    }
+  }
+  return s;
+}
 
-	tab = malloc(10000);
-	i = 0;
-	while (args[i] && ft_strcmp(args[i], "<<") != 0)
-		i++;
-	i++;
-	amogus2(line, args, i, tab);
+int check_unclosed_quotes(char *s) {
+  if(!s)
+    return(1);
+  int len = ft_strlen(s);
+  if (s[0] == '\'' || s[0] == '"') {
+    if (s[0] != s[len - 1]) {
+      printf("Error: unclosed quotes\n");
+      return(1);
+    }
+  }
+  return 0;
+}
+
+void amongus(char **args)
+{
+  int i;
+  int j;
+  char **tab = malloc(10000);
+  char *line;
+
+  j = 0;
+  i = 0;
+  while(args[i] && ft_strcmp(args[i], "<<") != 0)
+    i++;
+  i++;
+  while (1)
+  {
+    line = readline("amogus ඞ ");
+    if (ft_strcmp(line, args[i]) == 0)
+    {
+      j = 0;
+      while (tab[j])
+        printf("%s\n", tab[j++]);
+      free(tab);
+      break;
+    }
+    tab[j] = line;
+    j++;
+  }
+  i = 0;
+  while(args[i] && ft_strcmp(args[i], "<<") != 0)
+    i++;
+  while(args[i])
+    args[i++] = NULL;
+  mini_execute(args, "");
 }

@@ -1,9 +1,7 @@
 TODO :
 
-- Make Homebrew 42 work
-- Fix History : No empty lines
+- Redirections:
+    <
 - Do it for mutiple > > > >
 - Detect redirections and pipes when they are in same word ex : "echo uwu>txt.txt"
-- Fix EOF with cat
-- Fix ctrl+C ctrl+D ctrl+\
-- Fix EOF with > < >> <<
+
