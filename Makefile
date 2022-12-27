@@ -6,13 +6,14 @@
 #    By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/05 18:01:40 by mpankewi          #+#    #+#              #
-#    Updated: 2022/12/27 14:48:00 by mdoumi           ###   ########.fr        #
+#    Updated: 2022/12/27 19:07:07 by mdoumi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= minishell
 
-SRCS 		=	builtin.c \
+SRCS 		=	amongus.c \
+				builtin.c \
 				minishell.c \
 				pipe.c \
 				redirection.c \
@@ -20,7 +21,8 @@ SRCS 		=	builtin.c \
 				utils.c \
 				utils2.c \
 				utils3.c \
-				utils4.c
+				utils4.c \
+				utils5.c
 
 GCC			= gcc -Wall -Wextra -Werror -lreadline
 LIBS 		= libft/libft.a
