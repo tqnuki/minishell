@@ -6,13 +6,30 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:59:40 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/27 16:38:05 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/27 16:41:51 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 t_shell	*g_s;
+
+int	pipe_funcs(char **args, char *line)
+{
+	if (pippin("|", args) == 1)
+		pipe_execute(args, line);
+	else if (pippin("<", args) == 1)
+		sussy(args, line);
+	else if (pippin(">", args) == 1)
+		right_arrow(args, line, O_WRONLY | O_CREAT | O_TRUNC, ">");
+	else if (pippin(">>", args) == 1)
+		right_arrow(args, line, O_RDWR | O_CREAT | O_APPEND, ">>");
+	else if (pippin("<<", args) == 1)
+		amongus(args);
+	else
+		return (0);
+	return (1);
+}
 
 int	mini_execute(char **args, char *line)
 {
@@ -23,16 +40,8 @@ int	mini_execute(char **args, char *line)
 		return (1);
 	if (ft_strcmp(args[0], "exit") == 0)
 		exit(0);
-	else if (pippin("|", args) == 1)
-		pipe_execute(args, line);
-	else if (pippin("<", args) == 1)
-		sussy(args, line);
-	else if (pippin(">", args) == 1)
-		right_arrow(args, line, O_WRONLY | O_CREAT | O_TRUNC, ">");
-	else if (pippin(">>", args) == 1)
-		right_arrow(args, line, O_RDWR | O_CREAT | O_APPEND, ">>");
-	else if (pippin("<<", args) == 1)
-		amongus(args);
+	if (pipe_funcs(args, line) == 1)
+		return (1);
 	else if (ft_strcmp(args[0], "cd") == 0)
 		mini_cd(args);
 	else if (ft_strcmp(args[0], "echo") == 0)
