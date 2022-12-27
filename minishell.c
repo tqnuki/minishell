@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:59:40 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/22 12:11:17 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/27 10:56:12 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,16 +91,41 @@ int launch(char **args, char *line)
     return 1;
 }
 
-void sussy(char **args)
+void	sussy(char **args, char *line)
 {
-    char *buf = malloc(10);
-    int rd;
-    int fd = open(args[1], O_RDONLY);
-    while(rd && rd != -1)
-    {
-        rd = read(fd, buf, 1);
-        printf("%s", buf);
-    }
+	int	fd;
+	int	cpy;
+
+	fd = open(args[find_pos(args, "<") + 1], O_RDONLY, 0777);
+	if (fd < 0)
+		perror("ERROR");
+	if (find_pos(args, "<") != 0)
+	{
+		cpy = dup(STDIN_FILENO);
+		dup2(fd, STDIN_FILENO);
+		close(fd);
+		args = ft_first_tab_split(args, "<");
+		g_s->thing = launch(args,
+				ft_strtrim(ft_single_split(line, '<')[0], " "));
+		dup2(cpy, STDIN_FILENO);
+	}
+	else
+		sussy2(args);
+}
+
+void	sussy2(char **args)
+{
+	char	*buf;
+	int		rd;
+	int		fd;
+
+	fd = open(args[1], O_RDONLY);
+	buf = malloc(10);
+	while (rd && rd != -1)
+	{
+		rd = read(fd, buf, 1);
+		printf("%s", buf);
+	}
 }
 
 int	mini_execute(char **args, char *line)
