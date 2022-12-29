@@ -6,15 +6,13 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:59:40 by mpankewi          #+#    #+#             */
-/*   Updated: 2022/12/27 11:12:49 by mdoumi           ###   ########.fr       */
+/*   Updated: 2022/12/29 14:08:53 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 t_shell	*g_s;
-
-#include <string.h>
 
 int launch_executable(char *name, char *arguments[], char *line)
 {
@@ -142,15 +140,9 @@ int	mini_execute(char **args, char *line)
     else if (pippin("<", args) == 1)
         sussy(args, line);
 	else if (pippin(">", args) == 1)
-	{
-		printf("L:MAO 1\n");
 		right_arrow(args, line, O_WRONLY | O_CREAT | O_TRUNC, ">");
-	}
 	else if (pippin(">>", args) == 1)
-	{
-		printf("L:MAO 2\n");
 		right_arrow(args, line, O_RDWR | O_CREAT | O_APPEND, ">>");
-	}
     else if (pippin("<<", args) == 1)
         amongus(args);
 	else if (ft_strcmp(args[0], "cd") == 0)
@@ -175,6 +167,7 @@ void	signalhandler(int sig)
 	if (sig == SIGINT)
 	{
 		printf("\nbash-6.9.$ ");
+		rl_redisplay();
 		signal(SIGQUIT, signalhandler);
 	}
 	if (sig == SIGQUIT)
@@ -207,6 +200,7 @@ int	main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
+
 	g_s = malloc(sizeof(t_shell));
 	g_s->env = malloc(100000);
 	copy_char_array(env, g_s->env);

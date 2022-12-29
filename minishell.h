@@ -14,8 +14,8 @@
 # define MINISHELL_H
 
 # include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+# include "readline/readline.h"
+# include "readline/history.h"
 # include <stdlib.h>
 # include <signal.h>
 # include <unistd.h>
@@ -87,7 +87,7 @@ char	**ft_single_split(const char *str, char charset);
 
 
 
-int	find_pos(char **av, char *str);
+int		find_pos(char **av, char *str);
 char	**ft_first_tab_split(char **args, char *str);
 void	sussy2(char **args);
 void	sussy(char **args, char *line);

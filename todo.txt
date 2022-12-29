@@ -3,3 +3,4 @@ TODO :
 - Do it for mutiple > > > >
 - Detect redirections and pipes when they are in same word ex : "echo uwu>txt.txt"
 - Fix the "<< end cat > out"
+- Problem with echo "uwu ><|>><< owo"

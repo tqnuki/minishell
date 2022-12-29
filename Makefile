@@ -6,7 +6,7 @@
 #    By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/05 18:01:40 by mpankewi          #+#    #+#              #
-#    Updated: 2022/12/27 19:15:03 by mdoumi           ###   ########.fr        #
+#    Updated: 2022/12/29 14:08:09 by mdoumi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRCS =	builtin.c \
 		utils3.c \
 		utils4.c
 
-GCC			= gcc -Wall -Wextra -Werror -lreadline
+GCC			= gcc -Wall -Wextra -Werror -I /Users/mdoumi/.brew/Cellar/readline/8.2.1/include -L /Users/mdoumi/.brew/Cellar/readline/8.2.1/lib/ -lreadline
 LIBS 		= libft/libft.a
 OBJS		= ${SRCS:.c=.o}
 
